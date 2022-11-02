@@ -1,5 +1,5 @@
 //window._ = require('lodash');
-window._ = import ('lodash');
+window._ = import('lodash');
 
 /**
  * We'll load jQuery and the Bootstrap jQuery plugin which provides support
@@ -17,10 +17,11 @@ window._ = import ('lodash');
 
 
 try {
-    window.Popper = import ('popper.js').default;
-    window.$ = window.jQuery = import ('jquery');
+    window.Popper = import('popper.js').default;
+    window.$ = window.jQuery = import('jquery');
 
-    import ('bootstrap');
+    import('bootstrap');
+    import('inputmask');
 } catch (e) {
 }
 

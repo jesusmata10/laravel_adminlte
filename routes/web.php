@@ -27,4 +27,6 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/usuario', 'UserController')->names('usuario');
 
+    Route::resource('/personas', PersonasController::class)->names('persona');
+
 });

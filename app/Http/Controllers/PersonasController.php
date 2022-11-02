@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Personas;
 use Illuminate\Http\Request;
 
-class UserController extends Controller
+class PersonasController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -16,11 +17,11 @@ class UserController extends Controller
         $breadcrumb = [
             [
                 'link' => '#',
-                'name' => 'Usuarios',
+                'name' => 'Personas',
             ],
         ];
-        
-        return view('users.index', compact('breadcrumb'));
+
+        return view('personas.index', compact('breadcrumb'));
     }
 
     /**
@@ -30,7 +31,18 @@ class UserController extends Controller
      */
     public function create()
     {
-        //
+        $breadcrumb = [
+            [
+                'link' => route('persona.index'),
+                'name' => 'Personas',
+            ],
+            [
+                'link' => '#',
+                'name' => 'Nueva Persona'
+            ]
+        ];
+
+        return view('personas.create', compact('breadcrumb'));
     }
 
     /**
@@ -41,16 +53,16 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        dd($request);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Personas  $personas
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Personas $personas)
     {
         //
     }
@@ -58,10 +70,10 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Personas  $personas
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Personas $personas)
     {
         //
     }
@@ -70,10 +82,10 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Models\Personas  $personas
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Personas $personas)
     {
         //
     }
@@ -81,10 +93,10 @@ class UserController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Personas  $personas
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Personas $personas)
     {
         //
     }

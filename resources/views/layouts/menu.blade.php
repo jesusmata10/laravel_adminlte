@@ -7,74 +7,23 @@
 </li>
 <li class="nav-item">
     <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-tree"></i>
+        <i class="nav-icon fas fa-fw fa-user"></i>
         <p>
-            UI Elements
+            Clap
             <i class="fas fa-angle-left right"></i>
         </p>
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="pages/UI/general.html" class="nav-link">
-                
-                <p>General</p>
-                <i class="fas fa-angle-left right"></i>
-            </a>
-            <ul class="nav nav-treeview">
-                <li class="nav-item">
-                    <a href="pages/UI/general.html" class="nav-link">
-                        <i class="far fa-user nav-icon"></i>
-                        <p>General2</p>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="pages/UI/icons.html" class="nav-link">
-                        <i class="far fa-user nav-icon"></i>
-                        <p>Icons2</p>
-                    </a>
-                </li>
-            </ul>
-        </li>
-        <li class="nav-item">
-            <a href="pages/UI/icons.html" class="nav-link">
+            <a href="{{ route('persona.index') }}" class="nav-link" {{ Request::is('persona.index') ? 'active' : '' }}>
                 <i class="far fa-circle nav-icon"></i>
-                <p>Icons</p>
+                <p>Jefe de Hogar</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="pages/UI/buttons.html" class="nav-link">
+            <a href="pages/UI/icons.html" class="nav-link" {{ Request::is('home') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Buttons</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/UI/sliders.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Sliders</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/UI/modals.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Modals &amp; Alerts</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/UI/navbar.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Navbar &amp; Tabs</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/UI/timeline.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Timeline</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="pages/UI/ribbons.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Ribbons</p>
+                <p>Carnet</p>
             </a>
         </li>
     </ul>
@@ -98,6 +47,35 @@
             <a href="pages/UI/ribbons.html" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Ribbons</p>
+            </a>
+        </li>
+    </ul>
+</li>
+<li class="nav-item">
+    <a href="#" class="nav-link">
+        <i class="nav-icon fas fa-tachometer-alt"></i>
+        <p>
+            Dashboard
+            <i class="right fas fa-angle-left"></i>
+        </p>
+    </a>
+    <ul class="nav nav-treeview">
+        <li class="nav-item">
+            <a href="{{ route('persona.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Persona</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('usuario.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Usuarios</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="./index3.html" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Dashboard v3</p>
             </a>
         </li>
     </ul>
