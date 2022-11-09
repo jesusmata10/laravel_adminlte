@@ -29,14 +29,15 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
+                        <img src="{{ asset('storage/img/logo_consejo_comunal.png') }}"
                             class="user-image img-circle elevation-2" alt="User Image">
                         <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
-                            <img src="https://assets.infyom.com/logo/blue_logo_150x150.png"
+                            {{-- asset('storage/file.txt'); --}}
+                            <img src="{{ asset('storage/img/logo_consejo_comunal.png') }}"
                                 class="img-circle elevation-2" alt="User Image">
                             <p>
                                 {{ Auth::user()->name }}
@@ -86,11 +87,7 @@
 
         <!-- Main Footer -->
         <footer class="main-footer">
-            <div class="float-right d-none d-sm-block">
-                <b>Version</b> 3.0.5
-            </div>
-            <strong>Copyright &copy; 2014-2022 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights
-            reserved.
+            @include('layouts.parciales.footer')
         </footer>
     </div>
 
@@ -98,6 +95,9 @@
     @stack('third_party_scripts')
 
     @stack('page_scripts')
+
+    @yield('script')
+
 </body>
 
 </html>

@@ -29,7 +29,9 @@ class HomeController extends Controller
                 'name' => 'Home',
             ],
         ];
+
+        $prueba = 'texto de prueba';
         
-        return view('home', compact('breadcrumb'));
+        return view('home', compact('breadcrumb', 'prueba'));
     }
 }

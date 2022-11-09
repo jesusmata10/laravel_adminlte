@@ -1,11 +1,4 @@
-//window._ = require('lodash');
 window._ = import('lodash');
-
-/**
- * We'll load jQuery and the Bootstrap jQuery plugin which provides support
- * for JavaScript based Bootstrap features such as modals and tabs. This
- * code may be modified to fit the specific needs of your application.
- */
 
 /*try {
     window.Popper = require('popper.js').default;
@@ -18,10 +11,10 @@ window._ = import('lodash');
 
 try {
     window.Popper = import('popper.js').default;
-    window.$ = window.jQuery = import('jquery');
-
+    window.$ = window.jQuery = import('jquery');   
+    import('moment/moment.js');
     import('bootstrap');
-    import('inputmask');
+    
 } catch (e) {
 }
 

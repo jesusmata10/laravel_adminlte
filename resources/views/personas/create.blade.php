@@ -1,6 +1,6 @@
 @extends('layouts.app')
 @section('content')
-<?php
+    <?php
     use Carbon\Carbon;
     ?>
     <div class="row">
@@ -42,7 +42,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-registered"></i></span>
                                     </div>
-                                    <input class="form-control text-uppercase mask_rif" type="text" name="rif" maxlength="12">
+                                    <input class="form-control text-uppercase mask_rif" type="text" name="rif"
+                                        maxlength="12">
                                 </div>
                             </div>
                         </div>
@@ -154,9 +155,9 @@
                                         </div>
                                         <select class="form-control estado" name="estado_id" id="entidad_id">
                                             <option value="" selected>Seleccione una opción</option>
-                                            {{--@foreach ($entidad as $combo)
+                                            {{-- @foreach ($entidad as $combo)
                                                 <option value="{{ $combo->id }}">{{ $combo->estado }}</option>
-                                            @endforeach--}}
+                                            @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
@@ -223,9 +224,9 @@
                                         </div>
                                         <select class="form-control" name="tzona" id="tzona">
                                             <option value="" selected>Seleccione una opción</option>
-                                            {{--@foreach ($zonas as $combo)
+                                            {{-- @foreach ($zonas as $combo)
                                                 <option value="{{ $combo->id }}">{{ $combo->nombre }}</option>
-                                            @endforeach--}}
+                                            @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
@@ -247,9 +248,9 @@
                                         </div>
                                         <select class="form-control" name="tcalle" id="tcalle">
                                             <option value="" selected>Seleccione una opción</option>
-                                            {{--@foreach ($area as $combo)
+                                            {{-- @foreach ($area as $combo)
                                                 <option value="{{ $combo->id }}">{{ $combo->nombre }}</option>
-                                            @endforeach--}}
+                                            @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
@@ -269,9 +270,9 @@
                                         </div>
                                         <select class="form-control" name="tvivienda" id="tvivienda">
                                             <option value="" selected>Seleccione una opción</option>
-                                            {{--@foreach ($hogar as $combo)
+                                            {{-- @foreach ($hogar as $combo)
                                                 <option value="{{ $combo->id }}">{{ $combo->nombre }}</option>
-                                            @endforeach--}}
+                                            @endforeach --}}
                                         </select>
                                     </div>
                                 </div>
@@ -355,7 +356,7 @@
                                         </span>
                                     </div>
                                     <input type="text" class="form-control float-right datepicker" name="fechacf"
-                                        id="fechacf" autocomplete="off" readonly>
+                                        id="fechacf" autocomplete="off">
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
@@ -437,8 +438,8 @@
 
                     <div class="card-footer">
                         <div class="float-right">
-                            <button class="btn btn-sm btn-primary" type="submit" id="registrar"><i
-                                    class="fas fa-save"></i> Enviar
+                            <button class="btn btn-sm btn-primary" type="submit" id="registrar"><i class="fas fa-save"
+                                    disabled></i> Enviar
                             </button>
                             <a href="{{ route('persona.index') }}" type="button" class="btn btn-sm btn-danger"><i
                                     class="fas fa-arrow-left"></i> Cancelar</a>
@@ -448,60 +449,58 @@
             </form>
         </div>
     </div>
-    
 @endsection
-@push('third_party_scripts')
+@push('page_scripts')
     <script>
-        console.log('hola mundo');
-        $(document).ready(function() {
+        console.log('prueba de script')
+        document.addEventListener('DOMContentLoaded', function() {
+            // jquery code here
             $('.mask_tlf').inputmask("(9999) 999-99-99")
             $('.mask_rif').inputmask("99999999-9")
-        });
 
-        $('.datepicker').datepicker({
-            format: "dd-mm-yyyy",
-            clearBtn: true,
-            language: "es",
-            orientation: "bottom auto",
-            changeYear: false,
-            endDate: new Date()
-        });
 
-        $(document).ready(function() {
+            $('.datepicker').datepicker({
+                dateFormat: "dd-mm-yy",
+                changeYear: true,
+                buttonText: "Choose",
+            });
 
-            $('#btnAgregarFamiliar').on('click', function() {
-                accionAgregarFamiliar();
-            })
-            accionAgregarFamiliar = function() {
-                var id = ++$("input[name='personaTemp[]']").length
-                let primer_nombre = $('#primer_nombref').val()
-                let segundo_nombre = $('#segundo_nombref').val()
-                let primer_apellido = $('#primer_apellidof').val()
-                let segundo_apellido = $('#segundo_apellidof').val()
-                let cedula = $('#cedulacf').val()
-                let fecha = $('#fechacf').val()
-                let parentesco = $('#parentesco').val()
-                let parentescotxt = $('#parentesco option:selected').text()
-                let lugarnac = $('#lugarnacf').val()
-                let nacionalidad = $('#nacionalidadf').val()
+            $(document).ready(function() {
 
-                let data = {
-                    id: id,
-                    primer_nombre: primer_nombre,
-                    segundo_nombre: segundo_nombre,
-                    primer_apellido: primer_apellido,
-                    segundo_apellido: segundo_apellido,
-                    cedula: cedula,
-                    fecha: fecha,
-                    parentesco: parentesco,
-                    parentescotxt: parentescotxt,
-                    lugarnac: lugarnac,
-                    nacionalidad: nacionalidad
-                }
-                console.log(data);
-                let accion = JSON.stringify(data)
-                if (primer_nombre !== '' && primer_apellido !== '' && fecha !== '' && parentesco !== '') {
-                    $('#mytable').append(`
+                $('#btnAgregarFamiliar').on('click', function() {
+                    accionAgregarFamiliar();
+                })
+                accionAgregarFamiliar = function() {
+                    var id = ++$("input[name='personaTemp[]']").length
+                    let primer_nombre = $('#primer_nombref').val()
+                    let segundo_nombre = $('#segundo_nombref').val()
+                    let primer_apellido = $('#primer_apellidof').val()
+                    let segundo_apellido = $('#segundo_apellidof').val()
+                    let cedula = $('#cedulacf').val()
+                    let fecha = $('#fechacf').val()
+                    let parentesco = $('#parentesco').val()
+                    let parentescotxt = $('#parentesco option:selected').text()
+                    let lugarnac = $('#lugarnacf').val()
+                    let nacionalidad = $('#nacionalidadf').val()
+
+                    let data = {
+                        id: id,
+                        primer_nombre: primer_nombre,
+                        segundo_nombre: segundo_nombre,
+                        primer_apellido: primer_apellido,
+                        segundo_apellido: segundo_apellido,
+                        cedula: cedula,
+                        fecha: fecha,
+                        parentesco: parentesco,
+                        parentescotxt: parentescotxt,
+                        lugarnac: lugarnac,
+                        nacionalidad: nacionalidad
+                    }
+                    console.log(data);
+                    let accion = JSON.stringify(data)
+                    if (primer_nombre !== '' && primer_apellido !== '' && fecha !== '' && parentesco !==
+                        '') {
+                        $('#mytable').append(`
 
             <tr id="row${id}">
                 <td style="display: none">
@@ -523,93 +522,35 @@
 
         `);
 
-                } else {
-                    toastr.options = {
-                        "closeButton": true,
-                        "progressBar": true
+                    } else {
+                        toastr.options = {
+                            "closeButton": true,
+                            "progressBar": true
+                        }
+                        toastr.error("Debe cargar toda la información de la carga familiar");
                     }
-                    toastr.error("Debe cargar toda la información de la carga familiar");
+
+                    //limpia los input despues de insertar
+                    $('#primer_nombref').val('');
+                    $('#segundo_nombref').val('');
+                    $('#primer_apellidof').val('');
+                    $('#segundo_apellidof').val('');
+                    $('#cedulacf').val('');
+                    $('#fechacf').val('');
+                    $('#parentesco').val('');
+                    $('#lugarnacf').val('');
+                    $('#nacionalidadf').val('');
+
                 }
 
-                //limpia los input despues de insertar
-                $('#primer_nombref').val('');
-                $('#segundo_nombref').val('');
-                $('#primer_apellidof').val('');
-                $('#segundo_apellidof').val('');
-                $('#cedulacf').val('');
-                $('#fechacf').val('');
-                $('#parentesco').val('');
-                $('#lugarnacf').val('');
-                $('#nacionalidadf').val('');
-
-            }
-
-            //elimina el registro selecionado
-            eliminarFamiliar = function(id) {
-                $('#row' + id).remove();
-            }
-
-        });
-
-        $('#entidad_id').change(function() {
-            $.ajax({
-                method: "POST",
-                url: "{{-- url('/municipioAjaxUser') --}}",
-                data: {
-                    entidad_id: $('#entidad_id').val(),
-                    '_token': $('input[name=_token]').val()
-                },
-                success: function(response) {
-                    $('#municipio_id').html(response);
-                    $("#parroquia_id").empty();
-                    $('#parroquia_id').append(
-                        '<option value="" selected>Seleccione una opción</option>');
-
-                },
-                beforeSend: function() {
-                    $('#municipio_id').append('<option value="" selected>Buscando...</option>');
+                //elimina el registro selecionado
+                eliminarFamiliar = function(id) {
+                    $('#row' + id).remove();
                 }
-            });
-        });
 
-        $('#entidad_id').change(function() {
-            $.ajax({
-                method: "POST",
-                url: "{{-- url('/ciudadAjaxUser') --}}",
-                data: {
-                    entidad_id: $('#entidad_id').val(),
-                    '_token': $('input[name=_token]').val()
-                },
-                success: function(response) {
-                    $('#ciudad_id').html(response);
-                    /*$('#municipio_id').empty();
-                    $('#municipio_id').append('<option value="" selected>Seleccione una opción</option>');*/
-                },
-                beforeSend: function() {
-                    $('#ciudad_id').append('<option value="" selected>Buscando...</option>');
-                }
             });
 
-        });
+        }, false);
 
-        $('#municipio_id').change(function() {
-            $.ajax({
-                method: "POST",
-                url: "{{-- url('/parroquiaAjaxUser') --}}",
-                data: {
-                    municipio_id: $('#municipio_id').val(),
-                    '_token': $('input[name=_token]').val()
-                },
-                success: function(response) {
-                    $('#parroquia_id').html(response);
-
-                },
-                beforeSend: function() {
-                    $('#parroquia_id').append('<option value="" selected>Buscando...</option>');
-                }
-            });
-
-        });
-        
     </script>
 @endpush
