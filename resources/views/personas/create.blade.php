@@ -10,7 +10,7 @@
                 id="personaForm" name="personaForm">
                 {{ csrf_field() }}
 
-                <div class="card">
+                <div class="card card-primary card-outline">
                     <div class="card-header">
                         <h3 class="card-title">Datos Personales</h3>
                     </div>
@@ -287,7 +287,7 @@
                     </div>
                 </div>
 
-                <div class="card">
+                <div class="card card-primary card-outline">
                     <div class="card-header">
                         <h3 class="card-title">Carga Familiar</h3>
                     </div>
