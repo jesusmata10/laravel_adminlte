@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\EntidadesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -29,4 +30,7 @@ Route::middleware(['auth'])->group(function () {
 
     Route::resource('/personas', PersonasController::class)->names('persona');
 
+    Route::post('/municipioAjaxUser', 'EntidadesController@municipioAjaxUser');
+    Route::post('/parroquiaAjaxUser', 'EntidadesController@parroquiaAjaxUser');
+    Route::post('/ciudadAjaxUser', 'EntidadesController@ciudadAjaxUser');
 });

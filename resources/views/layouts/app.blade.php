@@ -29,16 +29,15 @@
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item dropdown user-menu">
                     <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('storage/img/logo_consejo_comunal.png') }}"
-                            class="user-image img-circle elevation-2" alt="User Image">
+                        <img src="{{ asset('storage/cc.jpeg') }}" class="user-image img-circle elevation-2"
+                            alt="User Image">
                         <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
                     </a>
                     <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                         <!-- User image -->
                         <li class="user-header bg-primary">
                             {{-- asset('storage/file.txt'); --}}
-                            <img src="{{ asset('storage/img/logo_consejo_comunal.png') }}"
-                                class="img-circle elevation-2" alt="User Image">
+                            <img src="{{ asset('storage/cc.jpeg') }}" class="img-circle elevation-2" alt="User Image">
                             <p>
                                 {{ Auth::user()->name }}
                                 <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
@@ -56,6 +55,11 @@
                             </form>
                         </li>
                     </ul>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
+                        <i class="fas fa-th-large"></i>
+                    </a>
                 </li>
             </ul>
         </nav>
@@ -89,6 +93,14 @@
         <footer class="main-footer">
             @include('layouts.parciales.footer')
         </footer>
+
+        <aside class="control-sidebar control-sidebar-dark" style="display: block;">
+
+            <div class="p-3 control-sidebar-content" style="">
+                <h5>Informaci&oacute;n</h5>
+                
+            </div>
+        </aside>
     </div>
 
 
