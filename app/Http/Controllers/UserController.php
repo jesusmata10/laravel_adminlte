@@ -3,10 +3,12 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateUserRequest;
 use App\Models\Estados;
 use App\Models\Zonas;
 use App\Models\Areas;
 use App\Models\Hogares;
+use Spatie\Permission\Models\Role;
 
 class UserController extends Controller
 {
@@ -49,8 +51,10 @@ class UserController extends Controller
         $zona = Zonas::all();
         $area = Areas::all();
         $hogar = Hogares::all();
+        $roles = Role::select('id', 'name')->orderBy('name')->get();
 
-        return view('users.create', compact('breadcrumb', 'estado', 'zona', 'area', 'hogar'));
+
+        return view('users.create', compact('breadcrumb', 'estado', 'zona', 'area', 'hogar', 'roles'));
     }
 
     /**
@@ -59,7 +63,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserRequest $request)
     {
         dd($request);
     }
