@@ -51,9 +51,9 @@
                                 <label for="rif">Rif:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text @error('rif') is-invalid @enderror"><i class="fas fa-registered"></i></span>
+                                        <span class="input-group-text"><i class="fas fa-registered"></i></span>
                                     </div>
-                                    <input class="form-control text-uppercase mask_rif" type="text" name="rif" maxlength="12" value="{{ old('rif') }}">
+                                    <input class="form-control text-uppercase mask_rif @error('rif') is-invalid @enderror" type="text" name="rif" maxlength="12" value="{{ old('rif') }}">
                                 </div>
                                 @error('rif')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -155,8 +155,7 @@
                                         <span class="input-group-text @error('sexo') is-invalid @enderror"><i class="fas fa-user-friends"></i></span>
                                     </div>
 
-                                    <select class="form-control" name="sexo" id="sexo"
-                                        @error('sexo') is-invalid @enderror>
+                                    <select class="form-control @error('sexo') is-invalid @enderror" name="sexo" id="sexo">
                                         <option value="" selected>Seleccione una opci&oacute;n</option>
                                         <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Mujer
                                         </option>
@@ -234,7 +233,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-globe-americas"></i></span>
                                         </div>
-                                        <select class="form-control estado @error('estado_id') is-invalid @enderror>" name="estado_id" id="estado_id">
+                                        <select class="form-control estado @error('estado_id') is-invalid @enderror>" name="estados_id" id="estado_id">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($estado as $combo)
                                                 <option value="{{ $combo->id }}" @selected(old('estado_id') == $combo->id)>
@@ -243,7 +242,7 @@
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('estado_id')
+                                    @error('estados_id')
                                         <span class="right badge badge-danger">{{ $message }}</span>
                                     @enderror
                                 </div>
@@ -271,10 +270,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-city"></i></span>
                                         </div>
-                                        <select class="form-control @error('municipio_id') is-invalid @enderror" name="municipio_id" id=municipios_id" id="municipio_id"
-                                            @error('municipios_id') is-invalid @enderror>
-                                            <option value="{{ old('municipios_id') }}" selected>Seleccione una opción
-                                            </option>
+                                        <select class="form-control" name="municipios_id" id="municipio_id">
+                                            <option value="" selected>Seleccione una opción</option>
                                         </select>
                                     </div>
                                     @error('municipios_id')
@@ -289,10 +286,8 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-map-pin"></i></span>
                                         </div>
-                                        <select class="form-control" name="parroquias_id" id="parroquia_id"
-                                            @error('parroquias_id') is-invalid @enderror>
-                                            <option value="{{ old('parroquias_id') }}" selected>Seleccione una opción
-                                            </option>
+                                        <select class="form-control" name="parroquias_id" id="parroquia_id">
+                                            <option value="" selected>Seleccione una opción</option>
                                         </select>
                                     </div>
                                     @error('parroquias_id')
@@ -310,9 +305,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-city"></i></span>
                                         </div>
-                                        <input class="form-control text-uppercase" type="text" name="urbanizacion"
-                                            value="{{ old('urbanizacion') }}"
-                                            @error('urbanizacion') is-invalid @enderror>
+                                        <input class="form-control text-uppercase @error('urbanizacion') is-invalid @enderror" type="text" name="urbanizacion" value="{{ old('urbanizacion') }}">
                                     </div>
                                     @error('urbanizacion')
                                         <span class="right badge badge-danger">{{ $message }}</span>
@@ -326,8 +319,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-map-marked-alt"></i></span>
                                         </div>
-                                        <select class="form-control" name="tzona" id="tzona"
-                                            @error('tzona') is-invalid @enderror>
+                                        <select class="form-control @error('tzona') is-invalid @enderror" name="tzona" id="tzona">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($zona as $combo)
                                                 <option value="{{ $combo->id }}" @selected(old('tzona') == $combo->id)>
@@ -344,7 +336,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nzona">(*) Nombre de zona</label>
-                                    <input class="form-control text-uppercase" type="text" name="nzona" @error('nzona') is-invalid @enderror value="{{ old('nzona') }}">
+                                    <input class="form-control text-uppercase @error('nzona') is-invalid @enderror" type="text" name="nzona" value="{{ old('nzona') }}">
                                 </div>
                                 @error('nzona')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -359,7 +351,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-map-marked"></i></span>
                                         </div>
-                                        <select class="form-control" name="tcalle" id="tcalle" @error('tcalle') is-invalid @enderror>
+                                        <select class="form-control @error('tcalle') is-invalid @enderror" name="tcalle" id="tcalle">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($area as $combo)
                                                 <option value="{{ $combo->id }}" @selected(old('tcalle') == $combo->id)>{{ $combo->nombre }}</option>
@@ -374,7 +366,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="ncalle">(*) Nombre de Area</label>
-                                    <input class="form-control text-uppercase" type="text" name="ncalle" @error('ncalle') is-invalid @enderror value="{{ old('ncalle') }}">
+                                    <input class="form-control text-uppercase @error('ncalle') is-invalid @enderror" type="text" name="ncalle" value="{{ old('ncalle') }}">
                                 </div>
                                 @error('ncalle')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -387,7 +379,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-home"></i></span>
                                         </div>
-                                        <select class="form-control" name="tvivienda" id="tvivienda">
+                                        <select class="form-control @error('tvivienda') is-invalid @enderror" name="tvivienda" id="tvivienda">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($hogar as $combo)
                                                 {{-- <option value="{{ $combo->id }}">{{ $combo->nombre }}</option> --}}
@@ -405,8 +397,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="nvivienda">(*) Nombre Hogar:</label>
-                                    <input class="form-control text-uppercase" type="text" name="nvivienda"
-                                        @error('nvivienda') is-invalid @enderror value="{{ old('nvivienda') }}">
+                                    <input class="form-control text-uppercase @error('nvivienda') is-invalid @enderror" type="text" name="nvivienda" value="{{ old('nvivienda') }}">
                                 </div>
                                 @error('nvivienda')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -423,25 +414,24 @@
                     <div class="card-body">
                         <div class="row">
                             <div class="form-group col-6">
-                                <label for="">Nombre Usuario:</label>
+                                <label for="name">Nombre Usuario:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" name="name"
-                                        @error('name') is-invalid @enderror>
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name')}}" id="name">
                                 </div>
                                 @error('name')
                                     <span class="right badge badge-danger">{{ $message }}</span>
                                 @enderror
                             </div>
                             <div class="form-group col-6">
-                                <label for="">Rol:</label>
+                                <label for="rol">Rol:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-male"></i></span>
                                     </div>
-                                    <select class="form-control" name="rol" @error('rol') is-invalid @enderror>
+                                    <select class="form-control @error('rol') is-invalid @enderror" name="rol" id="rol">
                                         <option value="">Seleccione una opci&oacute;n</option>
                                         @foreach ($roles as $items)
                                             <option value="{{ $items->id }}" @selected(old('rol') == $items->id)>
@@ -462,7 +452,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fa fa-key"></i> </span>
                                     </div>
-                                    <input type="password" class="form-control" id="password" name="password"
+                                    <input type="password" class="form-control @error('password') is-invalid @enderror" id="password" name="password"
                                         onkeyup="validaClave()" title="Máximo 15 dígitos." />
                                     <div class="input-group-append">
                                         <span class="input-group-text">
@@ -472,10 +462,10 @@
                                             </i>
                                         </span>
                                     </div>
-                                    @error('password')
-                                        <span class="right badge badge-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
+                                @error('password')
+                                    <span class="right badge badge-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                             <div class="col-6 form-group">
                                 <label for="confirm_password">Confirmar Contraseña:</label>
@@ -483,7 +473,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"> <i class="fa fa-key"></i> </span>
                                     </div>
-                                    <input type="password" class="form-control" id="password_confirmation"
+                                    <input type="password" class="form-control @error('password_confirmation') is-invalid @enderror" id="password_confirmation"
                                         name="password_confirmation" />
                                     <div class="input-group-append">
                                         <span class="input-group-text">
@@ -493,10 +483,10 @@
                                             </i>
                                         </span>
                                     </div>
-                                    @error('password')
-                                        <span class="right badge badge-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
+                                @error('password_confirmation')
+                                    <span class="right badge badge-danger">{{ $message }}</span>
+                                @enderror
                             </div>
 
                             <div class="col-md-12">

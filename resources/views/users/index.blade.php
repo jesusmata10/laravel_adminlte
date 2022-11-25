@@ -177,7 +177,7 @@
         document.addEventListener('DOMContentLoaded', function() {
             // jquery code here
             console.log('Prueba de index user');
-            toastr.info('Are you the 6 fingered man?')
+            //toastr.info('Prueba de index user!')
             @if (session('success'))
                 toastr.options = {
                     "closeButton": true,

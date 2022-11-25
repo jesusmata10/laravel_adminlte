@@ -35,7 +35,7 @@ class CreateUserRequest extends FormRequest
             'sexo' => 'required',
             'celular' => 'required',
             'parentesco' => 'required',
-            'estado_id' => 'required',
+            'estados_id' => 'required',
             'ciudades_id' => 'required',
             'municipios_id' => 'required',
             'parroquias_id' => 'required',

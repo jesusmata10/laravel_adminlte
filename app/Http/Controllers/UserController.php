@@ -8,7 +8,18 @@ use App\Models\Estados;
 use App\Models\Zonas;
 use App\Models\Areas;
 use App\Models\Hogares;
+use PhpParser\Node\Stmt\TryCatch;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Str;
+use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Database\QueryException;
+use App\Models\User;
+use App\Models\Personas;
+use App\Models\Direccion;
+
 
 class UserController extends Controller
 {
@@ -26,7 +37,9 @@ class UserController extends Controller
             ]
         ];
 
-        return view('users.index', compact('breadcrumb'));
+        $users = User::all();
+
+        return view('users.index', compact('breadcrumb', 'users'));
     }
 
     /**
@@ -65,7 +78,47 @@ class UserController extends Controller
      */
     public function store(CreateUserRequest $request)
     {
-        dd($request);
+
+        $input = $request->all();
+        $input['user_create'] = Auth::id();
+        $input['personas_id'] = isset($request->personas_id) ? $request->personas_id : 0;
+        $input['fecha'] = Carbon::parse($request['fecha'])->format('Y-m-d');
+        $input['remember_token'] = Str::random(10);
+        $input['password'] = Hash::make($request->password);
+        $input['status'] = 1;
+        //dd($input);
+
+        try {
+            DB::transaction(function () use ($request, $input) {
+                $user = User::create($input);
+                $user->assignRole($request->rol);
+
+                $input['user_id'] = $user->id;
+                $persona = Personas::create($input);
+
+                $personaDireccionSave = new Direccion();
+                $personaDireccionSave->personas_id = $persona->id;
+                $personaDireccionSave->estados_id = $request->estados_id;
+                $personaDireccionSave->ciudades_id = $request->ciudades_id;
+                $personaDireccionSave->municipios_id = $request->municipios_id;
+                $personaDireccionSave->parroquias_id = $request->parroquias_id;
+                $personaDireccionSave->urbanizacion = $request->urbanizacion;
+                $personaDireccionSave->zonas_id = $request->tzona;
+                $personaDireccionSave->nzona = $request->nzona;
+                $personaDireccionSave->areas_id = $request->tcalle;
+                $personaDireccionSave->narea = $request->ncalle;
+                $personaDireccionSave->hogares_id = $request->tvivienda;
+                $personaDireccionSave->nhogar = $request->nvivienda;
+                $personaDireccionSave->status = 1;
+                $personaDireccionSave->save();
+            });
+            return redirect()->route('usuario.index')->with('success', 'Usuario Creado Sastifactoriamente');
+        } catch (QueryException $e) {
+            \Log::error('UserController.store', [
+                'message' => $e->getMessage(),
+            ]);
+            return redirect()->route('usuario.create')->with('error', 'Ha Ocurrido un error en el registro');
+        }
     }
 
     /**
@@ -76,7 +129,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        // $input = $request->all();
+
     }
 
     /**
