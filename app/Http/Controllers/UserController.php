@@ -19,7 +19,10 @@ use Illuminate\Database\QueryException;
 use App\Models\User;
 use App\Models\Personas;
 use App\Models\Direccion;
-
+use App\Models\Pais;
+use App\Models\Ciudades;
+use App\Models\Municipios;
+use App\Models\Parroquias;
 
 class UserController extends Controller
 {
@@ -63,11 +66,12 @@ class UserController extends Controller
         $estado = Estados::all('id', 'estado');
         $zona = Zonas::all();
         $area = Areas::all();
+        $pais = Pais::all();
         $hogar = Hogares::all();
         $roles = Role::select('id', 'name')->orderBy('name')->get();
 
 
-        return view('users.create', compact('breadcrumb', 'estado', 'zona', 'area', 'hogar', 'roles'));
+        return view('users.create', compact('breadcrumb', 'pais', 'estado', 'zona', 'area', 'hogar', 'roles'));
     }
 
     /**
@@ -141,7 +145,35 @@ class UserController extends Controller
      */
     public function edit($id)
     {
-        //
+
+        //@dump(decrypt($id));
+        $breadcrumb = [
+            [
+                'link' => route('usuario.index'),
+                'name' => 'Usuarios'
+            ],
+            [
+                'link' => '#',
+                'name' => 'Editar Usuario'
+            ]
+        ];
+
+        $estado = Estados::all('id', 'estado');
+        $ciudad = Ciudades::all();
+        $municipio = Municipios::all();
+        $parroquia = Parroquias::all();
+        $zona = Zonas::all();
+        $area = Areas::all();
+        $pais = Pais::all();
+        $hogar = Hogares::all();
+        $roles = Role::select('id', 'name')->orderBy('name')->get();
+
+        $user = User::editar(decrypt($id));
+        $rol = $user->roles[0];
+        //$roles = Role::orderBy('name')->pluck('name', 'id');
+        $roles = Role::select('id', 'name')->orderBy('id')->get();
+
+        return view('users.edit', compact('breadcrumb', 'estado', 'zona', 'area', 'pais', 'hogar', 'roles', 'user', 'ciudad', 'municipio', 'parroquia'));
     }
 
     /**
@@ -153,7 +185,7 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        dd($request);
     }
 
     /**

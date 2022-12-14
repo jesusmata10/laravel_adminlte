@@ -3,18 +3,11 @@
 @section('content')
     <div class="row">
         <div class="col-12">
-            @if ($errors->any())
-                <div class="alert alert-danger">
-                    <ul>
-                        @foreach ($errors->all() as $error)
-                            <li>{{ $error }}</li>
-                        @endforeach
-                    </ul>
-                </div>
-            @endif
-            <form action="{{ url('/usuario') }}" method="POST" role="form" data-toggle="validator" class="form"
+           
+            <form action="{{-- url('/usuario') --}}" method="POST" role="form" data-toggle="validator" class="form"
                 id="usuarioForm" name="usuarioForm">
                 {{ csrf_field() }}
+                @PUT
 
                 <div class="card">
                     <div class="card-header">
@@ -29,7 +22,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-address-card"></i></span>
                                     </div>
-                                    <input type="text" class="form-control @error('cedula') is-invalid @enderror" maxlength="10" name="cedula" value="{{ old('cedula') }}">
+                                    <input type="text" class="form-control @error('cedula') is-invalid @enderror" maxlength="10" name="cedula" value="{{ isset($user->personas->cedula) ? $user->personas->cedula : '' }}">
                                 </div>
                                 @error('cedula')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -41,7 +34,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-at"></i></span>
                                     </div>
-                                    <input class="form-control text-lowercase @error('email') is-invalid @enderror" type="text" name="email" value="{{ old('email') }}">
+                                    <input class="form-control text-lowercase @error('email') is-invalid @enderror" type="text" name="email" value="{{ isset($user->email) ? $user->email : '' }}">
                                 </div>
                                 @error('email')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -53,7 +46,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-registered"></i></span>
                                     </div>
-                                    <input class="form-control text-uppercase mask_rif @error('rif') is-invalid @enderror" type="text" name="rif" maxlength="12" value="{{ old('rif') }}">
+                                    <input class="form-control text-uppercase mask_rif @error('rif') is-invalid @enderror" type="text" name="rif" maxlength="12" value="{{ isset( $user->personas->rif ) ? $user->personas->rif : '' }}">
                                 </div>
                                 @error('rif')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -68,7 +61,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-signature"></i></span>
                                     </div>
-                                    <input id="primer_nombre" class="form-control text-uppercase @error('primer_nombre') is-invalid @enderror" type="text" name="primer_nombre" value="{{ old('primer_nombre') }}">
+                                    <input id="primer_nombre" class="form-control text-uppercase @error('primer_nombre') is-invalid @enderror" type="text" name="primer_nombre" value="{{ isset($user->personas->primer_nombre) ? $user->personas->primer_nombre : '' }}">
                                 </div>
                                 @error('primer_nombre')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -80,7 +73,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-signature"></i></span>
                                     </div>
-                                    <input id="segundo_nombre" class="form-control text-uppercase @error('segundo_nombre') is-invalid @enderror" type="text" name="segundo_nombre" value="{{ old('segundo_nombre') }}">
+                                    <input id="segundo_nombre" class="form-control text-uppercase @error('segundo_nombre') is-invalid @enderror" type="text" name="segundo_nombre" value="{{ isset($user->personas->segundo_nombre) ? $user->personas->segundo_nombre : '' }}">
                                 </div>
                                 @error('segundo_nombre')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -92,7 +85,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-signature"></i></span>
                                     </div>
-                                    <input id="primer_apellido" class="form-control text-uppercase @error('primer_apellido') is-invalid @enderror" type="text" name="primer_apellido" value="{{ old('primer_apellido') }}">
+                                    <input id="primer_apellido" class="form-control text-uppercase @error('primer_apellido') is-invalid @enderror" type="text" name="primer_apellido" value="{{ isset($user->personas->primer_apellido) ? $user->personas->primer_apellido : '' }}">
                                 </div>
                                 @error('primer_apellido')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -104,7 +97,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-signature"></i></span>
                                     </div>
-                                    <input id="segundo_apellido" class="form-control text-uppercase" type="text" name="segundo_apellido" value="{{ old('segundo_apellido') }}">
+                                    <input id="segundo_apellido" class="form-control text-uppercase" type="text" name="segundo_apellido" value="{{ isset($user->personas->segundo_nombre) ? $user->personas->segundo_nombre : '' }}">
                                 </div>
                             </div>
                         </div>
@@ -118,7 +111,7 @@
                                             <i class="far fa-calendar-alt"></i>
                                         </span>
                                     </div>
-                                    <input type="text" class="form-control float-right datepicker @error('fecha') is-invalid @enderror" name="fecha" autocomplete="off" value="{{ old('fecha') }}">
+                                    <input type="text" class="form-control float-right datepicker @error('fecha') is-invalid @enderror" name="fecha" autocomplete="off" value="{{ isset($user->personas->fecha) ? $user->personas->fecha : '' }}">
                                 </div>
                                 @error('fecha')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -130,7 +123,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-map-marked-alt"></i></span>
                                     </div>
-                                    <input class="form-control text-uppercase @error('lugarnac') is-invalid @enderror" type="text" name="lugarnac" value="{{ old('lugarnac') }}">
+                                    <input class="form-control text-uppercase @error('lugarnac') is-invalid @enderror" type="text" name="lugarnac" value="{{ isset($user->personas->lugarnac) ? $user->personas->lugarnac : '' }}">
                                 </div>
                                 @error('lugarnac')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -145,7 +138,7 @@
                                     <select class="form-control @error('nacionalidad') is-invalid @enderror" name="nacionalidad" id="nacionalidad">
                                         <option value="" selected>Seleccione una opci&oacute;n</option>
                                         @foreach ($pais as $combo)
-                                        <option value="{{ $combo->id }}" @selected(old('id') == $combo->id)>
+                                        <option value="{{ $combo->id }}" @selected( $user->personas->nacionalidad == $combo->pais)>
                                             {{ $combo->pais }}
                                         </option>
                                         @endforeach
@@ -164,9 +157,9 @@
 
                                     <select class="form-control @error('sexo') is-invalid @enderror" name="sexo" id="sexo">
                                         <option value="" selected>Seleccione una opci&oacute;n</option>
-                                        <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Mujer
+                                        <option value="M" {{ isset($user->personas->sexo) == 'M' ? 'selected' : '' }}>Mujer
                                         </option>
-                                        <option value="H" {{ old('sexo') == 'H' ? 'selected' : '' }}>Hombre
+                                        <option value="H" {{ isset($user->personas->sexo) == 'H' ? 'selected' : '' }}>Hombre
                                         </option>
                                     </select>
                                 </div>
@@ -183,7 +176,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-phone"></i></span>
                                     </div>
-                                    <input class="form-control mask_tlf" type="text" name="telefono_fijo">
+                                    <input class="form-control mask_tlf" type="text" name="telefono_fijo" value="{{ isset($user->personas->telefono) ? $user->personas->telefono : '' }}">
                                 </div>
                             </div>
                             <div class="form-group col-md-4">
@@ -192,7 +185,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-mobile-alt"></i></span>
                                     </div>
-                                    <input class="form-control mask_tlf @error('celular') is-invalid @enderror" type="text" name="celular" value="{{ old('celular')}}">
+                                    <input class="form-control mask_tlf @error('celular') is-invalid @enderror" type="text" name="celular" value="{{ isset($user->personas->celular) ? $user->personas->celular : '' }}">
                                 </div>
                                 @error('celular')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -206,23 +199,23 @@
                                     </div>
                                     <select class="form-control @error('parentesco') is-invalid @enderror" name="parentesco" id="parentesco">
                                         <option value="" selected>Seleccione una opci&oacute;n</option>
-                                        <option value="Jefe de Hogar" {{ old('parentesco') == 'Jefe de Hogar' ? 'selected' : '' }}>Jefe de Hogar
+                                        <option value="JEFE DE HOGAR" {{ isset($user->personas->parentesco) == 'JEFE DE HOGAR' ? 'selected' : '' }}>JEFE DE HOGAR
                                         </option>
-                                        <option value="Madre" {{ old('parentesco') == 'Madre' ? 'selected' : '' }}>Madre
+                                        <option value="Madre" {{ isset($user->personas->parentesco) == 'Madre' ? 'selected' : '' }}>Madre
                                         </option>
-                                        <option value="Padre" {{ old('parentesco') == 'Padre' ? 'selected' : '' }}>Padre
+                                        <option value="Padre" {{ isset($user->personas->parentesco) == 'Padre' ? 'selected' : '' }}>Padre
                                         </option>
-                                        <option value="Hijo" {{ old('parentesco') == 'Hijo' ? 'selected' : '' }}>Hijo
+                                        <option value="Hijo" {{ isset($user->personas->parentesco) == 'Hijo' ? 'selected' : '' }}>Hijo
                                         </option>
-                                        <option value="Hija" {{ old('parentesco') == 'Hija' ? 'selected' : '' }}>Hija
+                                        <option value="Hija" {{ isset($user->personas->parentesco) == 'Hija' ? 'selected' : '' }}>Hija
                                         </option>
-                                        <option value="Suegro" {{ old('parentesco') == 'Suegro' ? 'selected' : '' }}>
+                                        <option value="Suegro" {{ isset($user->personas->parentesco) == 'Suegro' ? 'selected' : '' }}>
                                             Suegro</option>
-                                        <option value="Suegra" {{ old('parentesco') == 'Suegra' ? 'selected' : '' }}>
+                                        <option value="Suegra" {{ isset($user->personas->parentesco) == 'Suegra' ? 'selected' : '' }}>
                                             Suegra</option>
-                                        <option value="Sobrina" {{ old('parentesco') == 'Sobrina' ? 'selected' : '' }}>
+                                        <option value="Sobrina" {{ isset($user->personas->parentesco) == 'Sobrina' ? 'selected' : '' }}>
                                             Sobrina</option>
-                                        <option value="Sobrino" {{ old('parentesco') == 'Sobrino' ? 'selected' : '' }}>
+                                        <option value="Sobrino" {{ isset($user->personas->parentesco) == 'Sobrino' ? 'selected' : '' }}>
                                             Sobrino</option>
                                     </select>
                                 </div>
@@ -243,7 +236,7 @@
                                         <select class="form-control estado @error('estado_id') is-invalid @enderror>" name="estados_id" id="estado_id">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($estado as $combo)
-                                                <option value="{{ $combo->id }}" @selected(old('estado_id') == $combo->id)>
+                                                <option value="{{ $combo->id }}" @selected( $user->personas->direccion->estados_id == $combo->id)>
                                                     {{ $combo->estado }}
                                                 </option>
                                             @endforeach
@@ -262,7 +255,11 @@
                                             <span class="input-group-text"><i class="fas fa-city"></i></span>
                                         </div>
                                         <select class="form-control @error('ciudades_id') is-invalid @enderror" name="ciudades_id" id="ciudad_id">
-                                            <option value="" selected>Seleccione una opción</option>
+                                            @foreach ($ciudad as $combo)
+                                                <option value="{{ $combo->id }}" @selected( $user->personas->direccion->ciudades_id == $combo->id)>
+                                                    {{ $combo->ciudad }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
                                     @error('ciudades_id')
@@ -279,11 +276,13 @@
                                         </div>
                                         <select class="form-control" name="municipios_id" id="municipio_id">
                                             <option value="" selected>Seleccione una opción</option>
+                                            @foreach ($municipio as $combo)
+                                                <option value="{{ $combo->id }}" @selected( $user->personas->direccion->municipios_id == $combo->id)>
+                                                    {{ $combo->municipio }}
+                                                </option>
+                                            @endforeach
                                         </select>
                                     </div>
-                                    @error('municipios_id')
-                                        <span class="right badge badge-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3" id="divParroquia">
@@ -295,11 +294,13 @@
                                         </div>
                                         <select class="form-control" name="parroquias_id" id="parroquia_id">
                                             <option value="" selected>Seleccione una opción</option>
+                                            @foreach ($parroquia as $combo)
+                                            <option value="{{ $combo->id }}" @selected( $user->personas->direccion->parroquias_id == $combo->id)>
+                                                {{ $combo->parroquia }}
+                                            </option>
+                                        @endforeach
                                         </select>
                                     </div>
-                                    @error('parroquias_id')
-                                        <span class="right badge badge-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                             </div>
                         </div>
@@ -312,7 +313,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-city"></i></span>
                                         </div>
-                                        <input class="form-control text-uppercase @error('urbanizacion') is-invalid @enderror" type="text" name="urbanizacion" value="{{ old('urbanizacion') }}">
+                                        <input class="form-control text-uppercase @error('urbanizacion') is-invalid @enderror" type="text" name="urbanizacion" value="{{ isset($user->personas->direccion->urbanizacion) ? $user->personas->direccion->urbanizacion : '' }}">
                                     </div>
                                     @error('urbanizacion')
                                         <span class="right badge badge-danger">{{ $message }}</span>
@@ -329,7 +330,7 @@
                                         <select class="form-control @error('tzona') is-invalid @enderror" name="tzona" id="tzona">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($zona as $combo)
-                                                <option value="{{ $combo->id }}" @selected(old('tzona') == $combo->id)>
+                                                <option value="{{ $combo->id }}" @selected($user->personas->direccion->zonas_id == $combo->id)>
                                                     {{ $combo->nombre }}
                                                 </option>
                                             @endforeach
@@ -343,7 +344,7 @@
                             <div class="col-md-4">
                                 <div class="form-group">
                                     <label for="nzona">(*) Nombre de zona</label>
-                                    <input class="form-control text-uppercase @error('nzona') is-invalid @enderror" type="text" name="nzona" value="{{ old('nzona') }}">
+                                    <input class="form-control text-uppercase @error('nzona') is-invalid @enderror" type="text" name="nzona" value="{{ isset($user->personas->direccion->nzona) ? $user->personas->direccion->nzona : '' }}">
                                 </div>
                                 @error('nzona')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -361,23 +362,17 @@
                                         <select class="form-control @error('tcalle') is-invalid @enderror" name="tcalle" id="tcalle">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($area as $combo)
-                                                <option value="{{ $combo->id }}" @selected(old('tcalle') == $combo->id)>{{ $combo->nombre }}</option>
+                                                <option value="{{ $combo->id }}" @selected( $user->personas->direccion->areas_id == $combo->id)>{{ $combo->nombre }}</option>
                                             @endforeach
                                         </select>
                                     </div>
-                                    @error('tcalle')
-                                        <span class="right badge badge-danger">{{ $message }}</span>
-                                    @enderror
                                 </div>
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="ncalle">(*) Nombre de Area</label>
-                                    <input class="form-control text-uppercase @error('ncalle') is-invalid @enderror" type="text" name="ncalle" value="{{ old('ncalle') }}">
+                                    <input class="form-control text-uppercase @error('ncalle') is-invalid @enderror" type="text" name="ncalle" value="{{ isset($user->personas->direccion->narea)}}">
                                 </div>
-                                @error('ncalle')
-                                    <span class="right badge badge-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="col-md-3">
                                 <div class="form-group">
@@ -390,7 +385,7 @@
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($hogar as $combo)
                                                 {{-- <option value="{{ $combo->id }}">{{ $combo->nombre }}</option> --}}
-                                                <option value="{{ $combo->id }}" @selected(old('tvivienda') == $combo->id)>
+                                                <option value="{{ $combo->id }}" @selected($user->personas->direccion->hogares_id == $combo->id)>
                                                     {{ $combo->nombre }}
                                                 </option>
                                             @endforeach
@@ -404,7 +399,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="nvivienda">(*) Nombre Hogar:</label>
-                                    <input class="form-control text-uppercase @error('nvivienda') is-invalid @enderror" type="text" name="nvivienda" value="{{ old('nvivienda') }}">
+                                    <input class="form-control text-uppercase @error('nvivienda') is-invalid @enderror" type="text" name="nvivienda" value="{{ isset($user->personas->direccion->nhogar) ? $user->personas->direccion->nhogar : '' }}">
                                 </div>
                                 @error('nvivienda')
                                     <span class="right badge badge-danger">{{ $message }}</span>
@@ -426,11 +421,8 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-user"></i></span>
                                     </div>
-                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name')}}" id="name">
+                                    <input type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ isset($user->name) ? $user->name : '' }}" id="name">
                                 </div>
-                                @error('name')
-                                    <span class="right badge badge-danger">{{ $message }}</span>
-                                @enderror
                             </div>
                             <div class="form-group col-6">
                                 <label for="rol">Rol:</label>
@@ -441,7 +433,7 @@
                                     <select class="form-control @error('rol') is-invalid @enderror" name="rol" id="rol">
                                         <option value="">Seleccione una opci&oacute;n</option>
                                         @foreach ($roles as $items)
-                                            <option value="{{ $items->id }}" @selected(old('rol') == $items->id)>
+                                            <option value="{{ $items->id }}" @selected($user->roles[0]->id == $items->id)>
                                                 {{ $items->name }}</option>
                                         @endforeach
                                     </select>

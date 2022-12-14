@@ -8,6 +8,7 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 use Spatie\Permission\Traits\HasRoles;
+use Spatie\Permission\Models\Role;
 
 class User extends Authenticatable
 {
@@ -50,5 +51,32 @@ class User extends Authenticatable
     public function personas()
     {
         return $this->hasOne(Personas::class)->orderBy('cedula', 'ASC');
+    }
+
+    public function scopeEmail($query, $email)
+    {
+
+        if ($email)
+            return $query->where('email', 'LIKE', "%$email%");
+    }
+
+    public function scoperol($query, $rol)
+    {
+
+        if ($rol)
+            return $query->where('rol', 'LIKE', "%$rol%");
+    }
+
+    public function scopeId($query, $id)
+    {
+        //dd($id);
+        if ($id)
+            return $query->where('id', 'LIKE', "$id");
+    }
+
+    public static function editar($id)
+    {
+        $data = User::with(['roles', 'personas'])->id($id)->first();
+        return $data; //revisar consulta
     }
 }
