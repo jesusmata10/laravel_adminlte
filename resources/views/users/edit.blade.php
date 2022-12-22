@@ -4,10 +4,10 @@
     <div class="row">
         <div class="col-12">
            
-            <form action="{{-- url('/usuario') --}}" method="POST" role="form" data-toggle="validator" class="form"
+            <form action="{{ route('usuario.update', encrypt($user->id) ) }}" method="POST" role="form" data-toggle="validator" class="form"
                 id="usuarioForm" name="usuarioForm">
                 {{ csrf_field() }}
-                @PUT
+                @method('PUT')
 
                 <div class="card">
                     <div class="card-header">
@@ -15,6 +15,8 @@
                     </div>
 
                     <div class="card-body">
+                        <input type="hidden" name="personas_id"value="{{ $user->personas->id}}">
+                        <input type="hidden" name="id" value="{{ $user->id}}">
                         <div class="row">
                             <div class="form-group col-sm-12 col-md-4">
                                 <label for="cedula">(*) C&eacutedula:</label>
@@ -327,7 +329,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-map-marked-alt"></i></span>
                                         </div>
-                                        <select class="form-control @error('tzona') is-invalid @enderror" name="tzona" id="tzona">
+                                        <select class="form-control @error('tzona') is-invalid @enderror" name="zonas_id" id="tzona">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($zona as $combo)
                                                 <option value="{{ $combo->id }}" @selected($user->personas->direccion->zonas_id == $combo->id)>
@@ -359,7 +361,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-map-marked"></i></span>
                                         </div>
-                                        <select class="form-control @error('tcalle') is-invalid @enderror" name="tcalle" id="tcalle">
+                                        <select class="form-control @error('tcalle') is-invalid @enderror" name="areas_id" id="tcalle">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($area as $combo)
                                                 <option value="{{ $combo->id }}" @selected( $user->personas->direccion->areas_id == $combo->id)>{{ $combo->nombre }}</option>
@@ -371,7 +373,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="ncalle">(*) Nombre de Area</label>
-                                    <input class="form-control text-uppercase @error('ncalle') is-invalid @enderror" type="text" name="ncalle" value="{{ isset($user->personas->direccion->narea)}}">
+                                    <input class="form-control text-uppercase @error('ncalle') is-invalid @enderror" type="text" name="narea" value="{{ isset($user->personas->direccion->narea)}}">
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -381,7 +383,7 @@
                                         <div class="input-group-prepend">
                                             <span class="input-group-text"><i class="fas fa-home"></i></span>
                                         </div>
-                                        <select class="form-control @error('tvivienda') is-invalid @enderror" name="tvivienda" id="tvivienda">
+                                        <select class="form-control @error('tvivienda') is-invalid @enderror" name="hogares_id" id="tvivienda">
                                             <option value="" selected>Seleccione una opción</option>
                                             @foreach ($hogar as $combo)
                                                 {{-- <option value="{{ $combo->id }}">{{ $combo->nombre }}</option> --}}
@@ -399,7 +401,7 @@
                             <div class="col-md-3">
                                 <div class="form-group">
                                     <label for="nvivienda">(*) Nombre Hogar:</label>
-                                    <input class="form-control text-uppercase @error('nvivienda') is-invalid @enderror" type="text" name="nvivienda" value="{{ isset($user->personas->direccion->nhogar) ? $user->personas->direccion->nhogar : '' }}">
+                                    <input class="form-control text-uppercase @error('nvivienda') is-invalid @enderror" type="text" name="nhogar" value="{{ isset($user->personas->direccion->nhogar) ? $user->personas->direccion->nhogar : '' }}">
                                 </div>
                                 @error('nvivienda')
                                     <span class="right badge badge-danger">{{ $message }}</span>

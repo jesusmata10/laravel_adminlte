@@ -3,7 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateUserRequest;
+use App\Http\Requests\user\CreateUserRequest;
+use App\Http\Requests\user\EditUserRequest;
 use App\Models\Estados;
 use App\Models\Zonas;
 use App\Models\Areas;
@@ -23,6 +24,7 @@ use App\Models\Pais;
 use App\Models\Ciudades;
 use App\Models\Municipios;
 use App\Models\Parroquias;
+use Illuminate\Support\Arr;
 
 class UserController extends Controller
 {
@@ -186,6 +188,45 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         dd($request);
+        @dump(decrypt($id));
+        $consulta = User::findOrFail(decrypt($id));
+        @dump($consulta);
+
+        $input = $request->all();
+        $input['user_id'] = Auth::id();
+        $input['user_create'] = Auth::id();
+        $input['status'] = (bool)1;
+        $input['password'] = Hash::make($request->password);
+        $input['fecha'] = Carbon::parse($request['fecha'])->format('Y-m-d');
+
+        try {
+            @dump(decrypt($id));
+            dd($consulta->id);
+            DB::transaction(function () use ($request, $input, $consulta) {
+                // update user
+                $data = Arr::only($input, ['name', 'email', 'password']);
+                $user = User::where('id', $consulta->id)->update($data);
+
+                // se sincronizan los permisos con el usuario
+                $user = User::where('id', decrypt($id))->first();
+                $user->syncRoles($request->rol);
+
+                // update personas
+                $data = Arr::only($input, ['primer_nombre', 'segundo_nombre', 'primer_apellido', 'segundo_apellido', 'cedula', 'rif', 'fecha', 'telefono', 'celular', 'email', 'lugarnac', 'nacionalidad', 'sexo', 'parentesco', 'estatus', 'user_create', 'user_id']);
+                $personas = Personas::where('id', $consulta->persona->id)->update($data);
+
+                //update direccion
+                $data = Arr::only($input, ['persona_id', 'estados_id', 'municipios_id', 'parroquias_id', 'ciudades_id', 'urbanizacion', 'zonas_id', 'nzona', 'areas_id', 'narea', 'hogares_id', 'nhagar', 'status']);
+                $direccion = Direccion::where('personas_id', $consulta->personas->direccion->personas_id)->update($data);
+            });
+
+            return redirect()->route('usuario.index')->with('success', 'Usuario Actualizado Sastifactoriamente');
+        } catch (QueryException $e) {
+            \Log::error('UserController.update', [
+                'message' => $e->getMessage(),
+            ]);
+            return redirect()->route('usuario.create')->with('error', 'Ha Ocurrido un error en el registro');
+        }
     }
 
     /**
@@ -196,6 +237,8 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
-        //
+        //$prueba = User::find(decrypt($id));
+
+        //$prueba->delete();
     }
 }
