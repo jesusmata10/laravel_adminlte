@@ -185,12 +185,12 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(EditUserRequest $request, $id)
     {
-        dd($request);
-        @dump(decrypt($id));
+        //@dd($request);
+        //@dump($request);
         $consulta = User::findOrFail(decrypt($id));
-        @dump($consulta);
+        //@dump($consulta);
 
         $input = $request->all();
         $input['user_id'] = Auth::id();
@@ -201,7 +201,7 @@ class UserController extends Controller
 
         try {
             @dump(decrypt($id));
-            dd($consulta->id);
+            //dd($consulta->id);
             DB::transaction(function () use ($request, $input, $consulta) {
                 // update user
                 $data = Arr::only($input, ['name', 'email', 'password']);

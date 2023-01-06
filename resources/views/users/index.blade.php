@@ -43,8 +43,10 @@
                                             @foreach ($users as $items)
                                                 <tr class="text-center">
                                                     <td>{{ $items->id }}</td>
-                                                    <td>{{ $items->primer_nombre ?? 'Sin Datos' }}</td>
-                                                    <td>{{ $items->primer_apellido ?? 'Sin Datos' }}</td>
+                                                    <td>{{ isset($items->personas->primer_nombre) ? $items->personas->primer_nombre : 'Sin Informacion' }}
+                                                    </td>
+                                                    <td>{{ isset($items->personas->primer_apellido) ? $items->personas->primer_apellido : 'Sin informacion' }}
+                                                    </td>
                                                     <td>{{ $items->email }}</td>
                                                     <td>{{ isset($items->roles[0]->name) ? $items->roles[0]->name : '' }}
                                                         <span class="float-right badge badge-success">Activo</span>
@@ -85,115 +87,127 @@
 
         <div class="modal fade" id="modal-xl">
             <div class="modal-dialog modal-md">
-                <div class="modal-content">
-                    <div class="modal-header">
-                        <h4 class="modal-title">Información del Usuario</h4>
-                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                            <span aria-hidden="true">&times;</span>
-                        </button>
-                    </div>
-
-                    <div class="modal-body">
-
-                        <div class="row">
-                            <div class="form-group col-12">
-                                <h4>Datos Personales</h4>
-                            </div>
+                <div class="card card-primary card-outline">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h4 class="modal-title">Información del Usuario</h4>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
                         </div>
+                        <div class="modal-body">
 
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <label for="">C&eacute;dula:</label>
-                                <input type="text" class="form-control" name="mo_cedula" readonly>
+                            <div class="row">
+                                <div class="form-group col-12">
+                                    <h4>Datos Personales</h4>
+                                </div>
                             </div>
-                            <div class="form-group col-6">
-                                <label for="">Correo Electr&oacute;nico:</label>
-                                <input type="text" class="form-control" name="mo_email" readonly>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="">C&eacute;dula:</label>
+                                    <input type="text" class="form-control" name="mo_cedula" readonly>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="">Correo Electr&oacute;nico:</label>
+                                    <input type="text" class="form-control" name="mo_email" readonly>
+                                </div>
                             </div>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="">Primer Nombres:</label>
+                                    <input type="text" class="form-control" name="mo_nombres" readonly>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="">Primer Apellidos:</label>
+                                    <input type="text" class="form-control" name="mo_apellidos" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="">Rol:</label>
+                                    <input type="text" class="form-control" name="mo_role" readonly>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="">Tel&eacute;fono Movil:</label>
+                                    <input type="text" class="form-control" name="mo_telefono_movil" readonly>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="">Estatus:</label>
+                                    <input type="text" class="form-control" name="mo_estatus" readonly>
+                                </div>
+                            </div>
+
+                            <!--<div class="row">
+                                <div class="form-group col-12">
+                                    <h4>Datos Usuario</h4>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="form-group col-6">
+                                    <label for="">Nombre Usuario:</label>
+                                    <input type="text" class="form-control" name="mo_name" readonly>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="">Rol:</label>
+                                    <input type="text" class="form-control" name="mo_role" readonly>
+                                </div>
+                            </div>-->
+
                         </div>
-
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <label for="">Primer Nombres:</label>
-                                <input type="text" class="form-control" name="mo_nombres" readonly>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="">Primer Apellidos:</label>
-                                <input type="text" class="form-control" name="mo_apellidos" readonly>
-                            </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
                         </div>
-
-                        <div class="row">
-                            <div class="form-group col-6">
-                                <label for="">Rol:</label>
-                                <input type="text" class="form-control" name="mo_role" readonly>
-                            </div>
-                            <div class="form-group col-6">
-                                <label for="">Tel&eacute;fono Movil:</label>
-                                <input type="text" class="form-control" name="mo_telefono_movil" readonly>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            {{--
-              <div class="form-group col-6">
-                  <label for="">Entidad:</label>
-                  <input type="text" class="form-control" name="mo_entidad" readonly>
-              </div> --}}
-                            <div class="form-group col-6">
-                                <label for="">Estatus:</label>
-                                <input type="text" class="form-control" name="mo_estatus" readonly>
-                            </div>
-                        </div>
-
-                        <!--<div class="row">
-                                          <div class="form-group col-12">
-                                              <h4>Datos Usuario</h4>
-                                          </div>
-                                      </div>
-
-                                      <div class="row">
-                                          <div class="form-group col-6">
-                                              <label for="">Nombre Usuario:</label>
-                                              <input type="text" class="form-control" name="mo_name" readonly>
-                                          </div>
-                                          <div class="form-group col-6">
-                                              <label for="">Rol:</label>
-                                              <input type="text" class="form-control" name="mo_role" readonly>
-                                          </div>
-                                      </div>-->
-
-                    </div>
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Cerrar</button>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
-@endsection
-@push('page_scripts')
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // jquery code here
-            console.log('Prueba de index user');
-            //toastr.info('Prueba de index user!')
-            @if (session('success'))
-                toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true
-                }
-                toastr.success("{{ session('success') }}");
-            @endif
+    @endsection
+    @push('page_scripts')
+        <script>
+            function modal(item) {
+                let datatable = {!! $users !!}
+                console.log(datatable);
+                const result = datatable.filter(datatable => datatable.id === item)
+                console.log(datatable);
 
-            @if (session('error'))
-                toastr.options = {
-                    "closeButton": true,
-                    "progressBar": true
-                }
-                toastr.success("{{ session('error') }}");
-            @endif
+                $('input[name=mo_cedula]').val(result[0].personas.cedula)
+                $('input[name=mo_email]').val(result[0].email)
+                $('input[name=mo_nombres]').val(result[0].personas.primer_nombre)
+                $('input[name=mo_apellidos]').val(result[0].personas.primer_apellido)
+                $('input[name=mo_telefono_movil]').val(result[0].personas.celular)
+                $('input[name=mo_estatus]').val(result[0].estatus)
+                $('input[name=mo_name]').val(result[0].name)
+                $('input[name=mo_role]').val(result[0].roles[0].name)
+            }
 
-        }, false);
-    </script>
-@endpush
+            document.addEventListener('DOMContentLoaded', function() {
+                // jquery code here
+
+                console.log('Prueba de index user');
+                //toastr.info('Prueba de index user!')
+                @if (session('success'))
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true
+                    }
+                    toastr.success("{{ session('success') }}");
+                @endif
+
+                @if (session('error'))
+                    toastr.options = {
+                        "closeButton": true,
+                        "progressBar": true
+                    }
+                    toastr.success("{{ session('error') }}");
+                @endif
+
+            }, false);
+        </script>
+    @endpush

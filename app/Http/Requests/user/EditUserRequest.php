@@ -28,11 +28,11 @@ class EditUserRequest extends FormRequest
         return [
             'cedula' => [
                 'required',
-                Rule::unique('personas')->ignore($consulta->personas->id),
+                Rule::unique('personas')->ignore($this->personas_id),
             ],
             'email' => [
                 'required',
-                Rule::unique('users', 'email')->ignore($user->id),
+                Rule::unique('users')->ignore($this->id),
             ],
             'primer_nombre' => 'required',
             'primer_apellido' => 'required',
@@ -47,12 +47,12 @@ class EditUserRequest extends FormRequest
             'municipios_id' => 'required',
             'parroquias_id' => 'required',
             'urbanizacion' => 'required',
-            'tzona' => 'required',
+            'zonas_id' => 'required',
             'nzona' => 'required',
-            'tcalle' => 'required',
-            'ncalle' => 'required',
-            'tvivienda' => 'required',
-            'nvivienda' => 'required',
+            'areas_id' => 'required',
+            'narea' => 'required',
+            'hogares_id' => 'required',
+            'nhogar' => 'required',
             'name' => 'required',
             'rol' => 'required',
             'password' => 'required|min:3|confirmed',
@@ -63,7 +63,8 @@ class EditUserRequest extends FormRequest
     protected function prepareForValidation()
     {
         $this->merge([
-            'id' => (isset($this->id)) ? decrypt($this->id) : '',
+            'id' => (isset($this->id)) ? $this->id : '',
+            'personas_id' => (isset($this->personas_id)) ? $this->personas_id : '',
             'primer_nombre' => Str::upper($this->primer_nombre),
             'segundo_nombre' => Str::upper($this->segundo_nombre),
             'primer_apellido' => Str::upper($this->primer_apellido),
@@ -72,11 +73,11 @@ class EditUserRequest extends FormRequest
             'nacionalidad' => Str::upper($this->nacionalidad),
             'cedula' => Str::upper($this->cedula),
             'nzona' => Str::upper($this->nzona),
-            'ncalle' => Str::upper($this->ncalle),
-            'nvivienda' => Str::upper($this->nvivienda),
+            'narea' => Str::upper($this->narea),
+            'nhogar' => Str::upper($this->nhogar),
             'lugarnac' => Str::upper($this->lugarnac),
             'parentesco' => Str::upper($this->parentesco),
-            'email' => Str::lower($this->correo),
+            'email' => Str::lower($this->email),
 
         ]);
     }
@@ -111,7 +112,9 @@ class EditUserRequest extends FormRequest
             'name.required' => 'El name es requerido',
             'rol.required' => 'El rol es requerido',
             'password.required' => 'La password es requerido',
+            'password.confirmed' => 'La contraseña no coincide',
             'password_confirmation.required' => 'La confirmación es requerida',
+
         ];
     }
 }

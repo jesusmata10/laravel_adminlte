@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\user;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Str;
@@ -65,8 +65,8 @@ class CreateUserRequest extends FormRequest
             'nacionalidad' => Str::upper($this->nacionalidad),
             'cedula' => Str::upper($this->cedula),
             'nzona' => Str::upper($this->nzona),
-            'ncalle' => Str::upper($this->ncalle),
-            'nvivienda' => Str::upper($this->nvivienda),
+            'narea' => Str::upper($this->narea),
+            'nhogar' => Str::upper($this->nhogar),
             'lugarnac' => Str::upper($this->lugarnac),
             'parentesco' => Str::upper($this->parentesco),
         ]);
@@ -76,8 +76,10 @@ class CreateUserRequest extends FormRequest
     {
         return [
             'cedula.required' => 'La Cedula es requerida',
+            'cedula.unique' => 'La Cedula ya existe',
             'celular.required' => 'El Celular es requerido',
             'email.required' => 'El Email es requerido',
+            'email.unique' => 'El correo ya existe',
             'primer_nombre.required' => 'El Primer Nombre es requerido',
             'primer_apellido.required' => 'El Primer Apellido es requerido',
             'fecha.required' => 'La fecha es requerido',
@@ -86,7 +88,7 @@ class CreateUserRequest extends FormRequest
             'sexo.required' => 'El sexo es requerido',
             'celular.required' => 'El celular es requerido',
             'parentesco.required' => 'El parentesco es requerido',
-            'estado_id.required' => 'El estado es requerido',
+            'estados_id.required' => 'El estado es requerido',
             'ciudades_id.required' => 'La ciudad es requerido',
             'municipios_id.required' => 'El municipios es requerido',
             'parroquias_id.required' => 'La parroquias es requerido',
