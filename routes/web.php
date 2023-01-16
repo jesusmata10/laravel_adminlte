@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\EntidadesController;
+use Illuminate\Auth\Events\Logout;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -22,9 +23,10 @@ Route::get('/', function () {
 
 Auth::routes();
 
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', 'StatusUser'])->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
+    Route::get('/logout', 'LogoutController@salir')->name('logout');
 
     Route::resource('/usuario', 'UserController')->names('usuario');
 

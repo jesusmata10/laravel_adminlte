@@ -38,25 +38,29 @@
                                     </thead>
                                     <tbody>
 
-                                    @if (count($users) <= 0)
-                                        <tr class="text-center">
-                                            <td colspan="6">No hay resultado que mostrar</td>
-                                        </tr>
-                                    @else
-                                        @foreach ($users as $items)
+                                        @if (count($users) <= 0)
                                             <tr class="text-center">
-                                                <td>{{ $items->id }}</td>
-                                                <td>{{ isset($items->personas->primer_nombre) ? $items->personas->primer_nombre : 'Sin Informacion' }}
-                                                </td>
-                                                <td>{{ isset($items->personas->primer_apellido) ? $items->personas->primer_apellido : 'Sin informacion' }}
-                                                </td>
-                                                <td>{{ $items->email }}</td>
-                                                <td>{{ isset($items->roles[0]->name) ? $items->roles[0]->name : '' }}
-                                                    <span class="float-right badge badge-success">Activo</span>
-                                                </td>
-                                                <td>
-                                                    <div class="text-center">
-                                                        <button type="button" onClick="modal({{ $items->id }})"
+                                                <td colspan="6">No hay resultado que mostrar</td>
+                                            </tr>
+                                        @else
+                                            @foreach ($users as $items)
+                                                <tr class="text-center">
+                                                    <td>{{ $items->id }}</td>
+                                                    <td>{{ isset($items->personas->primer_nombre) ? $items->personas->primer_nombre : 'Sin Informacion' }}
+                                                    </td>
+                                                    <td>{{ isset($items->personas->primer_apellido) ? $items->personas->primer_apellido : 'Sin informacion' }}
+                                                    </td>
+                                                    <td>{{ $items->email }}</td>
+                                                    <td>{{ isset($items->roles[0]->name) ? $items->roles[0]->name : '' }}
+                                                        @if ($items->status == true)
+                                                            <span class="float-right badge badge-success">Activo</span>
+                                                        @else
+                                                            <span class="float-right badge badge-warning">Suspendido</span>
+                                                        @endif
+                                                    </td>
+                                                    <td>
+                                                        <div class="text-center">
+                                                            <button type="button" onClick="modal({{ $items->id }})"
                                                                 title="Ver" data-toggle="modal" data-target="#modal-xl"
                                                                 class="btn btn-sm btn-secondary"><i
                                                                 class="fas fa-eye"></i></button>
@@ -147,21 +151,21 @@
                             </div>
 
                             <!--<div class="row">
-                                <div class="form-group col-12">
-                                    <h4>Datos Usuario</h4>
+                                    <div class="form-group col-12">
+                                        <h4>Datos Usuario</h4>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="">Nombre Usuario:</label>
-                                    <input type="text" class="form-control" name="mo_name" readonly>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="">Rol:</label>
-                                    <input type="text" class="form-control" name="mo_role" readonly>
-                                </div>
-                            </div>-->
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="">Nombre Usuario:</label>
+                                        <input type="text" class="form-control" name="mo_name" readonly>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="">Rol:</label>
+                                        <input type="text" class="form-control" name="mo_role" readonly>
+                                    </div>
+                                </div>-->
 
                         </div>
                         <div class="modal-footer">

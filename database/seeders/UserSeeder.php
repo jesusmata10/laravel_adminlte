@@ -19,7 +19,8 @@ class UserSeeder extends Seeder
         User::create([
             'name' => 'Demo',
             'email' => 'demo@demo.com',
-            'password' => bcrypt('12345678')
+            'password' => bcrypt('12345678'),
+            'status' => true
         ]);
 
         $role = Role::where('name', 'Admin')->first();
