@@ -17,10 +17,18 @@ class StatusUser
      */
     public function handle(Request $request, Closure $next)
     {
-        if (!auth()->user()->status) {
-            return $next($request);
+        if (!Auth()->user()->status) {
+            Auth::logout();
+            return redirect('login')->with('error', 'Usuario Temporalmente Suspendido');
         } else {
-            return redirect()->route('logout')->with('msj', 'Usuario Temporalmente Suspendido');
+            return $next($request);
         }
     }
+
+
+    /*if (!Auth()->user()->status) {
+            return $next($request);
+        } else {
+            return redirect()->route('logout')->with('error', 'Usuario Temporalmente Suspendido');
+        } */
 }

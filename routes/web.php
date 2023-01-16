@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\EntidadesController;
 use Illuminate\Auth\Events\Logout;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,7 +17,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth.login');
 });
 
 //Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
@@ -26,7 +27,7 @@ Auth::routes();
 Route::middleware(['auth', 'StatusUser'])->group(function () {
 
     Route::get('/home', 'HomeController@index')->name('home');
-    Route::get('/logout', 'LogoutController@salir')->name('logout');
+    //Route::get('/logout', 'LogoutController@logout')->name('salir');
 
     Route::resource('/usuario', 'UserController')->names('usuario');
 

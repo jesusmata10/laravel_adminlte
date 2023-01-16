@@ -26,15 +26,16 @@
                             <div class="col-12">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
-                                    <tr class="text-center">
-                                        <th style="width:50px">N°</th>
-                                        <th>Nombre</th>
-                                        <th>Apellido</th>
-                                        <th>email</th>
-                                        <th>Rol</th>
+                                        <tr class="text-center">
+                                            <th style="width:50px">N°</th>
+                                            <th>Nombre</th>
+                                            <th>Apellido</th>
+                                            <th>email</th>
+                                            <th>Rol</th>
+                                            <th>Status</th>
 
-                                        <th style="width:100px">Acciones</th>
-                                    </tr>
+                                            <th style="width:100px">Acciones</th>
+                                        </tr>
                                     </thead>
                                     <tbody>
 
@@ -52,10 +53,12 @@
                                                     </td>
                                                     <td>{{ $items->email }}</td>
                                                     <td>{{ isset($items->roles[0]->name) ? $items->roles[0]->name : '' }}
+                                                    </td>
+                                                    <td>
                                                         @if ($items->status == true)
-                                                            <span class="float-right badge badge-success">Activo</span>
+                                                            <span class=" badge badge-success">Activo</span>
                                                         @else
-                                                            <span class="float-right badge badge-warning">Suspendido</span>
+                                                            <span class=" badge badge-warning">Suspendido</span>
                                                         @endif
                                                     </td>
                                                     <td>
@@ -63,17 +66,17 @@
                                                             <button type="button" onClick="modal({{ $items->id }})"
                                                                 title="Ver" data-toggle="modal" data-target="#modal-xl"
                                                                 class="btn btn-sm btn-secondary"><i
-                                                                class="fas fa-eye"></i></button>
-                                                        <a href="{{ url('/usuario/' . encrypt($items->id) . '/edit') }}"
-                                                           title="Editar" type="button"
-                                                           class="btn btn-sm btn-primary"><i
-                                                                class="fas fa-edit"></i></a>
-                                                        <!-- button type="button" class="btn btn-outline-primary">Eliminar</button -->
-                                                    </div>
-                                                </td>
-                                            </tr>
-                                        @endforeach
-                                    @endif
+                                                                    class="fas fa-eye"></i></button>
+                                                            <a href="{{ url('/usuario/' . encrypt($items->id) . '/edit') }}"
+                                                                title="Editar" type="button"
+                                                                class="btn btn-sm btn-primary"><i
+                                                                    class="fas fa-edit"></i></a>
+                                                            <!-- button type="button" class="btn btn-outline-primary">Eliminar</button -->
+                                                        </div>
+                                                    </td>
+                                                </tr>
+                                            @endforeach
+                                        @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -151,21 +154,21 @@
                             </div>
 
                             <!--<div class="row">
-                                    <div class="form-group col-12">
-                                        <h4>Datos Usuario</h4>
+                                        <div class="form-group col-12">
+                                            <h4>Datos Usuario</h4>
+                                        </div>
                                     </div>
-                                </div>
 
-                                <div class="row">
-                                    <div class="form-group col-6">
-                                        <label for="">Nombre Usuario:</label>
-                                        <input type="text" class="form-control" name="mo_name" readonly>
-                                    </div>
-                                    <div class="form-group col-6">
-                                        <label for="">Rol:</label>
-                                        <input type="text" class="form-control" name="mo_role" readonly>
-                                    </div>
-                                </div>-->
+                                    <div class="row">
+                                        <div class="form-group col-6">
+                                            <label for="">Nombre Usuario:</label>
+                                            <input type="text" class="form-control" name="mo_name" readonly>
+                                        </div>
+                                        <div class="form-group col-6">
+                                            <label for="">Rol:</label>
+                                            <input type="text" class="form-control" name="mo_role" readonly>
+                                        </div>
+                                    </div>-->
 
                         </div>
                         <div class="modal-footer">
@@ -176,46 +179,46 @@
             </div>
         </div>
     </div>
-        @endsection
-        @push('page_scripts')
-            <script>
-                function modal(item) {
-                    let datatable = {!! $users !!}
-                    console.log(datatable);
-                    const result = datatable.filter(datatable => datatable.id === item)
-                    console.log(datatable);
+@endsection
+@push('page_scripts')
+    <script>
+        function modal(item) {
+            let datatable = {!! $users !!}
+            console.log(datatable);
+            const result = datatable.filter(datatable => datatable.id === item)
+            console.log(datatable);
 
-                    $('input[name=mo_cedula]').val(result[0].personas.cedula)
-                    $('input[name=mo_email]').val(result[0].email)
-                    $('input[name=mo_nombres]').val(result[0].personas.primer_nombre)
-                    $('input[name=mo_apellidos]').val(result[0].personas.primer_apellido)
-                    $('input[name=mo_telefono_movil]').val(result[0].personas.celular)
-                    $('input[name=mo_estatus]').val(result[0].estatus)
-                    $('input[name=mo_name]').val(result[0].name)
-                    $('input[name=mo_role]').val(result[0].roles[0].name)
+            $('input[name=mo_cedula]').val(result[0].personas.cedula)
+            $('input[name=mo_email]').val(result[0].email)
+            $('input[name=mo_nombres]').val(result[0].personas.primer_nombre)
+            $('input[name=mo_apellidos]').val(result[0].personas.primer_apellido)
+            $('input[name=mo_telefono_movil]').val(result[0].personas.celular)
+            $('input[name=mo_estatus]').val((result[0].status == true) ? 'Activo' : 'Suspendido')
+            $('input[name=mo_name]').val(result[0].name)
+            $('input[name=mo_role]').val(result[0].roles[0].name)
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            // jquery code here
+
+            console.log('Prueba de index user desde el script');
+            //toastr.info('Prueba de index user desde el script!')
+            @if (session('success'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
                 }
+                toastr.success("{{ session('success') }}");
+            @endif
 
-                document.addEventListener('DOMContentLoaded', function () {
-                    // jquery code here
+            @if (session('error'))
+                toastr.options = {
+                    "closeButton": true,
+                    "progressBar": true
+                }
+                toastr.success("{{ session('error') }}");
+            @endif
 
-                    console.log('Prueba de index user desde el script');
-                    //toastr.info('Prueba de index user desde el script!')
-                    @if (session('success'))
-                        toastr.options = {
-                        "closeButton": true,
-                        "progressBar": true
-                    }
-                    toastr.success("{{ session('success') }}");
-                    @endif
-
-                        @if (session('error'))
-                        toastr.options = {
-                        "closeButton": true,
-                        "progressBar": true
-                    }
-                    toastr.success("{{ session('error') }}");
-                    @endif
-
-                }, false);
-            </script>
-    @endpush
+        }, false);
+    </script>
+@endpush
