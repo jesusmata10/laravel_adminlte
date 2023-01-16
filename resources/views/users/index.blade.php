@@ -49,7 +49,11 @@
                                                     </td>
                                                     <td>{{ $items->email }}</td>
                                                     <td>{{ isset($items->roles[0]->name) ? $items->roles[0]->name : '' }}
-                                                        <span class="float-right badge badge-success">Activo</span>
+                                                        @if ($items->status == true)
+                                                            <span class="float-right badge badge-success">Activo</span>
+                                                        @else
+                                                            <span class="float-right badge badge-warning">Suspendido</span>
+                                                        @endif
                                                     </td>
                                                     <td>
                                                         <div class="text-center">
@@ -144,21 +148,21 @@
                             </div>
 
                             <!--<div class="row">
-                                <div class="form-group col-12">
-                                    <h4>Datos Usuario</h4>
+                                    <div class="form-group col-12">
+                                        <h4>Datos Usuario</h4>
+                                    </div>
                                 </div>
-                            </div>
 
-                            <div class="row">
-                                <div class="form-group col-6">
-                                    <label for="">Nombre Usuario:</label>
-                                    <input type="text" class="form-control" name="mo_name" readonly>
-                                </div>
-                                <div class="form-group col-6">
-                                    <label for="">Rol:</label>
-                                    <input type="text" class="form-control" name="mo_role" readonly>
-                                </div>
-                            </div>-->
+                                <div class="row">
+                                    <div class="form-group col-6">
+                                        <label for="">Nombre Usuario:</label>
+                                        <input type="text" class="form-control" name="mo_name" readonly>
+                                    </div>
+                                    <div class="form-group col-6">
+                                        <label for="">Rol:</label>
+                                        <input type="text" class="form-control" name="mo_role" readonly>
+                                    </div>
+                                </div>-->
 
                         </div>
                         <div class="modal-footer">
