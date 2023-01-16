@@ -13,60 +13,63 @@
                                 <a href="{{ url('usuario/create') }}" type="button" class="btn btn-sm btn-primary"><i
                                         class="fa fa-plus"></i> Nuevo</a>
                                 <button type="button" onClick="reports('pdf')" class="btn btn-sm btn-primary"><i
-                                        class="fa fa-file"></i> Pdf</button>
+                                        class="fa fa-file"></i> Pdf
+                                </button>
                                 <button type="button" onClick="reports('excel')" class="btn btn-sm btn-primary"><i
-                                        class="fa fa-file"></i> Excel</button>
+                                        class="fa fa-file"></i> Excel
+                                </button>
 
                             </div>
-                        </div><br>
+                        </div>
+                        <br>
                         <div class="row">
                             <div class="col-12">
                                 <table id="example2" class="table table-bordered table-hover">
                                     <thead>
-                                        <tr class="text-center">
-                                            <th style="width:50px">N°</th>
-                                            <th>Nombre</th>
-                                            <th>Apellido</th>
-                                            <th>email</th>
-                                            <th>Rol</th>
+                                    <tr class="text-center">
+                                        <th style="width:50px">N°</th>
+                                        <th>Nombre</th>
+                                        <th>Apellido</th>
+                                        <th>email</th>
+                                        <th>Rol</th>
 
-                                            <th style="width:100px">Acciones</th>
-                                        </tr>
+                                        <th style="width:100px">Acciones</th>
+                                    </tr>
                                     </thead>
                                     <tbody>
 
-                                        @if (count($users) <= 0)
+                                    @if (count($users) <= 0)
+                                        <tr class="text-center">
+                                            <td colspan="6">No hay resultado que mostrar</td>
+                                        </tr>
+                                    @else
+                                        @foreach ($users as $items)
                                             <tr class="text-center">
-                                                <td colspan="6">No hay resultado que mostrar</td>
-                                            </tr>
-                                        @else
-                                            @foreach ($users as $items)
-                                                <tr class="text-center">
-                                                    <td>{{ $items->id }}</td>
-                                                    <td>{{ isset($items->personas->primer_nombre) ? $items->personas->primer_nombre : 'Sin Informacion' }}
-                                                    </td>
-                                                    <td>{{ isset($items->personas->primer_apellido) ? $items->personas->primer_apellido : 'Sin informacion' }}
-                                                    </td>
-                                                    <td>{{ $items->email }}</td>
-                                                    <td>{{ isset($items->roles[0]->name) ? $items->roles[0]->name : '' }}
-                                                        <span class="float-right badge badge-success">Activo</span>
-                                                    </td>
-                                                    <td>
-                                                        <div class="text-center">
-                                                            <button type="button" onClick="modal({{ $items->id }})"
+                                                <td>{{ $items->id }}</td>
+                                                <td>{{ isset($items->personas->primer_nombre) ? $items->personas->primer_nombre : 'Sin Informacion' }}
+                                                </td>
+                                                <td>{{ isset($items->personas->primer_apellido) ? $items->personas->primer_apellido : 'Sin informacion' }}
+                                                </td>
+                                                <td>{{ $items->email }}</td>
+                                                <td>{{ isset($items->roles[0]->name) ? $items->roles[0]->name : '' }}
+                                                    <span class="float-right badge badge-success">Activo</span>
+                                                </td>
+                                                <td>
+                                                    <div class="text-center">
+                                                        <button type="button" onClick="modal({{ $items->id }})"
                                                                 title="Ver" data-toggle="modal" data-target="#modal-xl"
                                                                 class="btn btn-sm btn-secondary"><i
-                                                                    class="fas fa-eye"></i></button>
-                                                            <a href="{{ url('/usuario/' . encrypt($items->id) . '/edit') }}"
-                                                                title="Editar" type="button"
-                                                                class="btn btn-sm btn-primary"><i
-                                                                    class="fas fa-edit"></i></a>
-                                                            <!-- button type="button" class="btn btn-outline-primary">Eliminar</button -->
-                                                        </div>
-                                                    </td>
-                                                </tr>
-                                            @endforeach
-                                        @endif
+                                                                class="fas fa-eye"></i></button>
+                                                        <a href="{{ url('/usuario/' . encrypt($items->id) . '/edit') }}"
+                                                           title="Editar" type="button"
+                                                           class="btn btn-sm btn-primary"><i
+                                                                class="fas fa-edit"></i></a>
+                                                        <!-- button type="button" class="btn btn-outline-primary">Eliminar</button -->
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    @endif
                                     </tbody>
                                 </table>
                             </div>
@@ -168,46 +171,47 @@
                 </div>
             </div>
         </div>
-    @endsection
-    @push('page_scripts')
-        <script>
-            function modal(item) {
-                let datatable = {!! $users !!}
-                console.log(datatable);
-                const result = datatable.filter(datatable => datatable.id === item)
-                console.log(datatable);
+    </div>
+        @endsection
+        @push('page_scripts')
+            <script>
+                function modal(item) {
+                    let datatable = {!! $users !!}
+                    console.log(datatable);
+                    const result = datatable.filter(datatable => datatable.id === item)
+                    console.log(datatable);
 
-                $('input[name=mo_cedula]').val(result[0].personas.cedula)
-                $('input[name=mo_email]').val(result[0].email)
-                $('input[name=mo_nombres]').val(result[0].personas.primer_nombre)
-                $('input[name=mo_apellidos]').val(result[0].personas.primer_apellido)
-                $('input[name=mo_telefono_movil]').val(result[0].personas.celular)
-                $('input[name=mo_estatus]').val(result[0].estatus)
-                $('input[name=mo_name]').val(result[0].name)
-                $('input[name=mo_role]').val(result[0].roles[0].name)
-            }
+                    $('input[name=mo_cedula]').val(result[0].personas.cedula)
+                    $('input[name=mo_email]').val(result[0].email)
+                    $('input[name=mo_nombres]').val(result[0].personas.primer_nombre)
+                    $('input[name=mo_apellidos]').val(result[0].personas.primer_apellido)
+                    $('input[name=mo_telefono_movil]').val(result[0].personas.celular)
+                    $('input[name=mo_estatus]').val(result[0].estatus)
+                    $('input[name=mo_name]').val(result[0].name)
+                    $('input[name=mo_role]').val(result[0].roles[0].name)
+                }
 
-            document.addEventListener('DOMContentLoaded', function() {
-                // jquery code here
+                document.addEventListener('DOMContentLoaded', function () {
+                    // jquery code here
 
-                console.log('Prueba de index user');
-                //toastr.info('Prueba de index user!')
-                @if (session('success'))
-                    toastr.options = {
+                    console.log('Prueba de index user desde el script');
+                    //toastr.info('Prueba de index user desde el script!')
+                    @if (session('success'))
+                        toastr.options = {
                         "closeButton": true,
                         "progressBar": true
                     }
                     toastr.success("{{ session('success') }}");
-                @endif
+                    @endif
 
-                @if (session('error'))
-                    toastr.options = {
+                        @if (session('error'))
+                        toastr.options = {
                         "closeButton": true,
                         "progressBar": true
                     }
                     toastr.success("{{ session('error') }}");
-                @endif
+                    @endif
 
-            }, false);
-        </script>
+                }, false);
+            </script>
     @endpush
