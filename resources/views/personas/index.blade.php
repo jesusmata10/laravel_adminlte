@@ -101,7 +101,7 @@
                         <div class="row">
                             <div class="col-12">
 
-                                <a href="{{ route('persona.create') }}" type="button" class="btn btn-sm btn-primary"><i
+                                <a href="{{ route('personas.create') }}" type="button" class="btn btn-sm btn-primary"><i
                                         class="fa fa-plus"></i> Nuevo</a>
 
 

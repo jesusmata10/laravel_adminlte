@@ -15,7 +15,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('persona.index') }}" class="nav-link"  {{ Request::is('persona') ? 'active' : '' }}>
+            <a href="{{ route('personas.index') }}" class="nav-link"  {{ Request::is('persona') ? 'active' : '' }}>
                 <i class="far fa-circle nav-icon"></i>
                 <p>Personas</p>
             </a>
@@ -44,7 +44,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('persona.index') }}" class="nav-link" {{ Request::is('persona.index') ? 'active' : '' }}>
+            <a href="{{ route('personas.index') }}" class="nav-link" {{ Request::is('persona.index') ? 'active' : '' }}>
                 <i class="far fa-circle nav-icon"></i>
                 <p>Jefe de Hogar</p>
             </a>
@@ -90,7 +90,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('persona.index') }}" class="nav-link">
+            <a href="{{ route('personas.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Persona</p>
             </a>

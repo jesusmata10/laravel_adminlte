@@ -6,7 +6,7 @@
     <div class="row">
         <div class="col-12">
 
-            <form action="{{-- route('personas.store') --}}" method="POST" role="form" data-toggle="validator" class="form"
+            <form action="{{ route('personas.store') }}" method="POST" role="form" data-toggle="validator" class="form"
                 id="personaForm" name="personaForm">
                 {{ csrf_field() }}
 
@@ -92,40 +92,80 @@
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="fecha">(*) Fecha:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
-                                        <span class="input-group-text">
-                                            <i class="far fa-calendar-alt"></i>
-                                        </span>
+                                            <span class="input-group-text">
+                                                <i class="far fa-calendar-alt"></i>
+                                            </span>
                                     </div>
-                                    <input type="text" class="form-control float-right datepicker" name="fecha"
-                                        autocomplete="off" readonly>
+                                    <input type="text"
+                                           class="form-control float-right datepicker @error('fecha') is-invalid @enderror"
+                                           name="fecha" autocomplete="off" value="{{ old('fecha') }}">
                                 </div>
+                                @error('fecha')
+                                <span class="right badge badge-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="lugarnac">(*) Lugar de Nacimiento:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-map-marked-alt"></i></span>
                                     </div>
-                                    <input class="form-control text-uppercase" type="text" name="lugarnac">
+                                    <input class="form-control text-uppercase @error('lugarnac') is-invalid @enderror"
+                                           type="text" name="lugarnac" value="{{ old('lugarnac') }}">
                                 </div>
+                                @error('lugarnac')
+                                <span class="right badge badge-danger">{{ $message }}</span>
+                                @enderror
                             </div>
-                            <div class="form-group col-md-4">
+                            <div class="form-group col-md-3">
                                 <label for="nacionalidad">(*) Nacionalidad:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="fas fa-map"></i></span>
                                     </div>
-                                    <input class="form-control text-uppercase" type="text" name="nacionalidad">
+                                    <select class="form-control @error('nacionalidad') is-invalid @enderror"
+                                            name="nacionalidad" id="nacionalidad">
+                                        <option value="" selected>Seleccione una opci&oacute;n</option>
+                                        @foreach ($pais as $combo)
+                                            <option value="{{ $combo->id }}" @selected(old('id') == $combo->id)>
+                                                {{ $combo->pais }}
+                                            </option>
+                                        @endforeach
+                                    </select>
                                 </div>
+                                @error('nacionalidad')
+                                <span class="right badge badge-danger">{{ $message }}</span>
+                                @enderror
+                            </div>
+                            <div class="form-group col-md-3">
+                                <label for="sexo">(*) Sexo:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text @error('sexo') is-invalid @enderror"><i
+                                                class="fas fa-user-friends"></i></span>
+                                    </div>
+
+                                    <select class="form-control @error('sexo') is-invalid @enderror" name="sexo"
+                                            id="sexo">
+                                        <option value="" selected>Seleccione una opci&oacute;n</option>
+                                        <option value="M" {{ old('sexo') == 'M' ? 'selected' : '' }}>Mujer
+                                        </option>
+                                        <option value="H" {{ old('sexo') == 'H' ? 'selected' : '' }}>Hombre
+                                        </option>
+                                    </select>
+                                </div>
+                                @error('sexo')
+                                <span class="right badge badge-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
                         <div class="row">
-                            <div class="form-group col-6">
+                            <div class="form-group col-md-4">
                                 <label for="telefono_fijo">Tel&eacute;fono Local:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -134,7 +174,7 @@
                                     <input class="form-control mask_tlf" type="text" name="telefono_fijo">
                                 </div>
                             </div>
-                            <div class="form-group col-6">
+                            <div class="form-group col-md-4">
                                 <label for="celular">(*) Tel&eacute;fono M&oacute;vil:</label>
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -142,6 +182,45 @@
                                     </div>
                                     <input class="form-control mask_tlf" type="text" name="celular">
                                 </div>
+                            </div>
+                            <div class="form-group col-md-4">
+                                <label for="parentesco">Parentesco:</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="fas fa-user-friends"></i></span>
+                                    </div>
+                                    <select class="form-control @error('parentesco') is-invalid @enderror"
+                                            name="parentesco" id="parentesco">
+                                        <option value="" selected>Seleccione una opci&oacute;n</option>
+                                        <option
+                                            value="Jefe de Hogar" {{ old('parentesco') == 'Jefe de Hogar' ? 'selected' : '' }}>
+                                            Jefe de Hogar
+                                        </option>
+                                        <option value="Madre" {{ old('parentesco') == 'Madre' ? 'selected' : '' }}>Madre
+                                        </option>
+                                        <option value="Padre" {{ old('parentesco') == 'Padre' ? 'selected' : '' }}>Padre
+                                        </option>
+                                        <option value="Hijo" {{ old('parentesco') == 'Hijo' ? 'selected' : '' }}>Hijo
+                                        </option>
+                                        <option value="Hija" {{ old('parentesco') == 'Hija' ? 'selected' : '' }}>Hija
+                                        </option>
+                                        <option value="Suegro" {{ old('parentesco') == 'Suegro' ? 'selected' : '' }}>
+                                            Suegro
+                                        </option>
+                                        <option value="Suegra" {{ old('parentesco') == 'Suegra' ? 'selected' : '' }}>
+                                            Suegra
+                                        </option>
+                                        <option value="Sobrina" {{ old('parentesco') == 'Sobrina' ? 'selected' : '' }}>
+                                            Sobrina
+                                        </option>
+                                        <option value="Sobrino" {{ old('parentesco') == 'Sobrino' ? 'selected' : '' }}>
+                                            Sobrino
+                                        </option>
+                                    </select>
+                                </div>
+                                @error('parentesco')
+                                <span class="right badge badge-danger">{{ $message }}</span>
+                                @enderror
                             </div>
                         </div>
 
@@ -155,9 +234,9 @@
                                         </div>
                                         <select class="form-control estado" name="estado_id" id="entidad_id">
                                             <option value="" selected>Seleccione una opción</option>
-                                            {{-- @foreach ($entidad as $combo)
+                                            @foreach ($estado as $combo)
                                                 <option value="{{ $combo->id }}">{{ $combo->estado }}</option>
-                                            @endforeach --}}
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -224,9 +303,9 @@
                                         </div>
                                         <select class="form-control" name="tzona" id="tzona">
                                             <option value="" selected>Seleccione una opción</option>
-                                            {{-- @foreach ($zonas as $combo)
+                                            @foreach ($zona as $combo)
                                                 <option value="{{ $combo->id }}">{{ $combo->nombre }}</option>
-                                            @endforeach --}}
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>
@@ -248,9 +327,9 @@
                                         </div>
                                         <select class="form-control" name="tcalle" id="tcalle">
                                             <option value="" selected>Seleccione una opción</option>
-                                            {{-- @foreach ($area as $combo)
+                                            @foreach ($area as $combo)
                                                 <option value="{{ $combo->id }}">{{ $combo->nombre }}</option>
-                                            @endforeach --}}
+                                            @endforeach 
                                         </select>
                                     </div>
                                 </div>
@@ -270,9 +349,9 @@
                                         </div>
                                         <select class="form-control" name="tvivienda" id="tvivienda">
                                             <option value="" selected>Seleccione una opción</option>
-                                            {{-- @foreach ($hogar as $combo)
+                                            @foreach ($hogar as $combo)
                                                 <option value="{{ $combo->id }}">{{ $combo->nombre }}</option>
-                                            @endforeach --}}
+                                            @endforeach
                                         </select>
                                     </div>
                                 </div>

@@ -31,7 +31,7 @@ Route::middleware(['auth', 'StatusUser'])->group(function () {
 
     Route::resource('/usuario', 'UserController')->names('usuario');
 
-    Route::resource('/personas', PersonasController::class)->names('persona');
+    Route::resource('/personas', PersonasController::class)->names('personas');
 
     Route::post('/municipioAjaxUser', 'EntidadesController@municipioAjaxUser');
     Route::post('/parroquiaAjaxUser', 'EntidadesController@parroquiaAjaxUser');

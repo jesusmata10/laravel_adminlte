@@ -6,7 +6,7 @@
     <title>{{ config('app.name') }}</title>
     <meta content='width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no' name='viewport'>
 
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/css/login.css'])
     @vite(['resources/js/app.js'])
 
     @stack('third_party_stylesheets')

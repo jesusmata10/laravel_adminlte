@@ -9,13 +9,15 @@
     <!-- Tell the browser to be responsive to screen width -->
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
 
-    @vite(['resources/css/app.css'])
+    @vite(['resources/css/app.css', 'resources/css/login.css'])
     @vite(['resources/js/app.js'])
 
 </head>
 
-<body class="hold-transition login-page">
+<body class="hold-transition login-page-mod">
+    
     <div class="login-box">
+        {{--<img src="{{ asset('/storage/login.jpg') }}" class="img-fluid" alt="...">--}}
         <div class="login-logo">
             <a href="{{ url('/home') }}"><b>{{ config('app.name') }}</b></a>
         </div>
@@ -56,7 +58,7 @@
 
                     <div class="row">
                         <div class="col-12">
-                            <button type="submit" class="btn btn-primary btn-block">Inicial</button>
+                            <button type="submit" class="btn btn-primary btn-block">Iniciar</button>
                         </div>
 
                     </div>

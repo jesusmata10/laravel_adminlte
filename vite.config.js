@@ -10,7 +10,7 @@ export default defineConfig({
         // add css and js file
         
         laravel({
-            input: ['resources/css/app.css', 'resources/js/app.js'],
+            input: ['resources/css/app.css', 'resources/css/login.css', 'resources/js/app.js'],
             refresh: true,
         }),
         

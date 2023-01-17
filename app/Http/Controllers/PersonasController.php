@@ -3,7 +3,17 @@
 namespace App\Http\Controllers;
 
 use App\Models\Personas;
+use App\Models\Pais;
+use App\Models\Estados;
+use App\Models\Ciudades;
+use App\Models\Parroquias;
+use App\Models\Municipios;
+use App\Models\Areas;
+use App\Models\Parentesco;
+use App\Models\Hogares;
+use App\Models\Zonas;
 use Illuminate\Http\Request;
+use App\Http\Requests\personas\PersonasCreateRequest;
 
 class PersonasController extends Controller
 {
@@ -42,7 +52,13 @@ class PersonasController extends Controller
             ]
         ];
 
-        return view('personas.create', compact('breadcrumb'));
+        $estado = Estados::all('id', 'estado');
+        $zona = Zonas::all();
+        $area = Areas::all();
+        $pais = Pais::all();
+        $hogar = Hogares::all();
+
+        return view('personas.create', compact('breadcrumb', 'estado', 'zona', 'area', 'pais', 'hogar'));
     }
 
     /**
@@ -51,7 +67,7 @@ class PersonasController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(PersonasCreateRequest $request)
     {
         dd($request);
     }
