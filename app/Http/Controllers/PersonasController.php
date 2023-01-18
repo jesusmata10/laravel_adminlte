@@ -43,7 +43,7 @@ class PersonasController extends Controller
     {
         $breadcrumb = [
             [
-                'link' => route('persona.index'),
+                'link' => route('personas.index'),
                 'name' => 'Personas',
             ],
             [

@@ -73,9 +73,15 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="pages/UI/ribbons.html" class="nav-link">
+            <a href="{{ route('roles.index') }}" class="nav-link">
                 <i class="far fa-circle nav-icon"></i>
-                <p>Ribbons</p>
+                <p>Roles</p>
+            </a>
+        </li>
+        <li class="nav-item">
+            <a href="{{ route('permisos.index') }}" class="nav-link">
+                <i class="far fa-circle nav-icon"></i>
+                <p>Permisos</p>
             </a>
         </li>
     </ul>

@@ -518,9 +518,9 @@
                     <div class="card-footer">
                         <div class="float-right">
                             <button class="btn btn-sm btn-primary" type="submit" id="registrar"><i class="fas fa-save"
-                                    disabled></i> Enviar
+                                    ></i> Enviar
                             </button>
-                            <a href="{{ route('persona.index') }}" type="button" class="btn btn-sm btn-danger"><i
+                            <a href="{{ route('personas.index') }}" type="button" class="btn btn-sm btn-danger"><i
                                     class="fas fa-arrow-left"></i> Cancelar</a>
                         </div>
                     </div>

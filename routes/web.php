@@ -33,6 +33,10 @@ Route::middleware(['auth', 'StatusUser'])->group(function () {
 
     Route::resource('/personas', PersonasController::class)->names('personas');
 
+    Route::resource('/roles', RolesController::class)->names('roles');
+    
+    Route::resource('/permiso', PermisosController::class)->names('permisos');
+
     Route::post('/municipioAjaxUser', 'EntidadesController@municipioAjaxUser');
     Route::post('/parroquiaAjaxUser', 'EntidadesController@parroquiaAjaxUser');
     Route::post('/ciudadAjaxUser', 'EntidadesController@ciudadAjaxUser');

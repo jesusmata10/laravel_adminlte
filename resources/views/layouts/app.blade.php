@@ -37,7 +37,7 @@
                         <!-- User image -->
                         <li class="user-header bg-primary">
                             {{-- asset('storage/file.txt'); --}}
-                            <img src="{{ asset('storage/cc.jpeg') }}" class="img-circle elevation-2" alt="User Image">
+                            <img src="{{ asset('storage/img/logo_consejo_comunal.png') }}" class="img-circle elevation-2" alt="User Image">
                             <p>
                                 {{ Auth::user()->name }}
                                 <small>Member since {{ Auth::user()->created_at->format('M. Y') }}</small>
