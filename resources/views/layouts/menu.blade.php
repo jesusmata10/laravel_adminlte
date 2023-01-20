@@ -15,13 +15,13 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('personas.index') }}" class="nav-link"  {{ Request::is('persona') ? 'active' : '' }}>
+            <a href="{{ route('personas.index') }}" class="nav-link"  {{ Request::is('personas') ? 'active' : '' }}>
                 <i class="far fa-circle nav-icon"></i>
                 <p>Personas</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('usuario.index') }}" class="nav-link" {{ Request::is('usuario') ? 'active' : '' }}>
+            <a href="{{ route('usuario.index') }}" class="nav-link" {{ Request::is('usuario.index') ? 'active' : '' }}>
                 <i class="far fa-circle nav-icon"></i>
                 <p>Usuarios</p>
             </a>
@@ -44,7 +44,7 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('personas.index') }}" class="nav-link" {{ Request::is('persona.index') ? 'active' : '' }}>
+            <a href="{{ route('personas.index') }}" class="nav-link" {{ Request::is('personas/index') ? 'active' : '' }}>
                 <i class="far fa-circle nav-icon"></i>
                 <p>Jefe de Hogar</p>
             </a>

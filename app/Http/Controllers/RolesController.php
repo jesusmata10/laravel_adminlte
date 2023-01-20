@@ -22,7 +22,7 @@ class RolesController extends Controller
             ]
         ];
 
-        $roles = Role::select('id', 'name')->orderBy('name')->get();
+        $roles = Role::select('id', 'name')->orderBy('name')->paginate(2);
 
         return view('roles.index', compact('roles', 'breadcrumb'));
     }
@@ -41,11 +41,11 @@ class RolesController extends Controller
             ],
             [
                 'link' => '#',
-                'name' => 'Crear Usuario'
+                'name' => 'Crear Rol'
             ]
         ];
 
-        return view('roles.create');
+        return view('roles.create', compact('breadcrumb'));
     }
 
     /**
@@ -56,9 +56,10 @@ class RolesController extends Controller
      */
     public function store(Request $request)
     {
+        
+        //dd($request);
         $role = new Role();
-        $role->name = $request->name;
-        $role->team_id = 1;
+        $role->name = $request->rol;
         $role->guard_name = 'web';
         $role->save();
 

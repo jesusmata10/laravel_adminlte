@@ -92,7 +92,7 @@ class UserController extends Controller
         $input['remember_token'] = Str::random(10);
         $input['password'] = Hash::make($request->password);
         $input['status'] = 1;
-        //dd($input);
+        dd($input);
 
         try {
             DB::transaction(function () use ($request, $input) {

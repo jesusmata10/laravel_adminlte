@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="container-fluid">
-        <p>vista index permisos</p>
+        
     </div>
 @endsection
 @push('page_scripts')
