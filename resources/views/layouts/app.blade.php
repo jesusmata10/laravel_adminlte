@@ -17,7 +17,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Main Header -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -69,7 +69,7 @@
 
         <!-- Content Wrapper. Contains page content -->
 
-        <div class="content-wrapper">
+        <div class="content-wrapper mt-5 mb-5">
             <section class="content-header">
                 <div class="container-fluid">
                     <div class="row mb-2">
@@ -90,7 +90,7 @@
         </div>
 
         <!-- Main Footer -->
-        <footer class="main-footer">
+        <footer class="main-footer fixed-bottom">
             @include('layouts.parciales.footer')
         </footer>
 

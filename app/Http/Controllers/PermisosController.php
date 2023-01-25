@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Spatie\Permission\Models\Permission;
 
 class PermisosController extends Controller
 {
@@ -16,13 +17,17 @@ class PermisosController extends Controller
         $breadcrumb = [
             [
                 'link' => '#',
-                'name' => 'Permisos',
+                'name' => 'Configuración'
+            ],
+            [
+                'link' => '#',
+                'name' => 'Permisos'
             ]
         ];
 
-        //$roles = Role::select('id', 'name')->orderBy('name')->get();
+        $permisos = Permission::select('id', 'name')->paginate(5);
 
-        return view('permisos.index', compact('breadcrumb'));
+        return view('permisos.index', compact('permisos', 'breadcrumb'));
     }
 
     /**
@@ -32,7 +37,18 @@ class PermisosController extends Controller
      */
     public function create()
     {
-        
+        $breadcrumb = [
+            [
+                'link' => '#',
+                'name' => 'Configuración'
+            ],
+            [
+                'link' => '#',
+                'name' => 'Crear Permisos'
+            ]
+        ];
+
+        return view('permisos.create', compact('breadcrumb'));
     }
 
     /**

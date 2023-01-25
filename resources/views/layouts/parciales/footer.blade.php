@@ -2,5 +2,5 @@
     Desarrollador - Development.</strong>
 Todos los derechos reservados.
 <div class="float-right d-none d-sm-inline-block">
-    <img src="{{ asset('/node_modules/flag-icons/flags/4x3/ve.svg') }}" alt="Ve" height="20" style="opacity: .8">
+    <img src="../../../../node_modules/flag-icons/flags/4x3/ve.svg" alt="Ve" height="20" style="opacity: .8">
 </div>

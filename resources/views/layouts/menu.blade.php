@@ -15,21 +15,21 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('personas.index') }}" class="nav-link"  {{ Request::is('personas') ? 'active' : '' }}>
+            <a href="{{ route('personas.index') }}" class="nav-link {{ Request::is('personas') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Personas</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="{{ route('usuario.index') }}" class="nav-link" {{ Request::is('usuario.index') ? 'active' : '' }}>
+            <a href="{{ route('usuario.index') }}" class="nav-link {{ Request::is('usuario.index') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>Usuarios</p>
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../index3.html" class="nav-link" {{ Request::is('home') ? 'active' : '' }}>
+            <a href="../../index3.html" class="nav-link {{ Request::is('home') ? 'active' : '' }}" >
                 <i class="far fa-circle nav-icon"></i>
-                <p>Dashboard v3</p>
+                <p>PDVSA</p>
             </a>
         </li>
     </ul>
