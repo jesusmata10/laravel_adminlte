@@ -4,7 +4,7 @@
     <div class="row">
         <div class="col-12">
 
-            @if (session('success'))
+            {{--  @if (session('success'))
                 <div class="alert alert-success desva">
                     {{ session('success') }}
                 </div>
@@ -12,7 +12,7 @@
                 <div class="alert alert-danger desva">
                     {{ session('error') }}
                 </div>
-            @endif
+            @endif --}}
 
             <div id="criterioBusqueda" class="alert alert-danger desva" style="display: none" role="alert">
 
@@ -91,10 +91,14 @@
                                     </tr>
                                 </thead>
                                 <tbody>
+                                    @php
+                                     $i = 0;   
+                                    @endphp
                                     {{-- @can('consultar') --}}
                                     @foreach ($permisos as $items)
+                                    
                                         <tr class="text-center">
-                                            <td>{{ $items->row_number }}</td>
+                                            <td>{{ ++$i }}</td>
                                             <td class="text-uppercase">{{ $items->name }}</td>
                                             <td> {{ isset($items->description) ? $items->description : 'Sin descripción' }}</td>
                                             <td>
@@ -102,7 +106,7 @@
                                                     <a href="{{-- url('/permission/modulePermission/'.$items->id) --}}" title="Módulos"
                                                         class="btn btn-sm btn-primary btn-sm"> <i
                                                             class="fa fa-shield-alt"></i></a>
-                                                    <a href="{{-- url('/permission/rolesPermission/'.$items->id) --}}" title="Permisos"
+                                                    <a href="{{ route('roles.show',  $items->id) }}" title="Permisos"
                                                         class="btn btn-sm btn-primary btn-sm"> <i
                                                             class="fa fa-user-shield"></i></a>
                                                     @can('editar')

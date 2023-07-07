@@ -34,6 +34,7 @@ Route::middleware(['auth', 'StatusUser'])->group(function () {
     Route::resource('/personas', PersonasController::class)->names('personas');
 
     Route::resource('/roles', RolesController::class)->names('roles');
+    Route::post('/storeRolPermiso', [App\Http\Controllers\RolesController::class, 'storeRolPermiso'])->name('rolesPermission');
     
     Route::resource('/permiso', PermisosController::class)->names('permisos');
 

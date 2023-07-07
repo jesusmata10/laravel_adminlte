@@ -17,7 +17,7 @@
 <body class="hold-transition sidebar-mini layout-fixed">
     <div class="wrapper">
         <!-- Main Header -->
-        <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top">
+        <nav class="main-header navbar navbar-expand navbar-white navbar-light fixed-top sidebarper">
             <!-- Left navbar links -->
             <ul class="navbar-nav">
                 <li class="nav-item">
@@ -48,7 +48,7 @@
                             <a href="#" class="btn btn-default btn-flat">Perfil</a>
                             <a href="#" class="btn btn-default btn-flat float-right"
                                 onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
-                                Salir
+                                <i class="fas fa-sign-in-alt nav-icon purple-text"></i> Salir
                             </a>
                             <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
                                 @csrf

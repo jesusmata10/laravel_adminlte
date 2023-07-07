@@ -12,9 +12,9 @@
 
         <div class="card card-primary card-outline">
             <div class="card-header">
-                <h3 class="card-title">Nuevo Rol</h3>
+                <h3 class="card-title">Nuevo Permiso</h3>  <span class="flag-icon flag-icon-us"></span>
             </div>
-            <form class="form" id="rolesForm" name="rolesForm" role="form" data-toggle="validator" method="POST" action="{{ url('permission') }}">
+            <form class="form" id="rolesForm" name="rolesForm" role="form" data-toggle="validator" method="POST" action="{{ route('permisos.store') }}">
                 {{ csrf_field() }}
 
                 <div class="card-body">
@@ -33,7 +33,7 @@
                 <div class="card-footer">
                     <div class="float-right">
                         <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
-                        <a href="{{ url('/permission') }}" class="btn btn-sm btn-danger">Cancelar</a>
+                        <a href="{{ route('permisos.index') }}" class="btn btn-sm btn-danger">Cancelar</a>
                     </div>
                 </div>
 

@@ -27,7 +27,7 @@
             </a>
         </li>
         <li class="nav-item">
-            <a href="../../index3.html" class="nav-link {{ Request::is('home') ? 'active' : '' }}" >
+            <a href="../../index3.html" class="nav-link {{ Request::is('home') ? 'active' : '' }}">
                 <i class="far fa-circle nav-icon"></i>
                 <p>PDVSA</p>
             </a>
@@ -44,7 +44,8 @@
     </a>
     <ul class="nav nav-treeview">
         <li class="nav-item">
-            <a href="{{ route('personas.index') }}" class="nav-link" {{ Request::is('personas/index') ? 'active' : '' }}>
+            <a href="{{ route('personas.index') }}" class="nav-link"
+                {{ Request::is('personas/index') ? 'active' : '' }}>
                 <i class="far fa-circle nav-icon"></i>
                 <p>Jefe de Hogar</p>
             </a>
@@ -68,50 +69,22 @@
     <ul class="nav nav-treeview">
         <li class="nav-item">
             <a href="{{ route('usuario.index') }}" class="nav-link">
-                <i class="far fa-user nav-icon"></i>
+                <i class="fas fa-users nav-icon text-orange"></i>
                 <p>Usuarios</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="{{ route('roles.index') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-user-tie nav-icon green-text"></i>
                 <p>Roles</p>
             </a>
         </li>
         <li class="nav-item">
             <a href="{{ route('permisos.index') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
+                <i class="fas fa-user-shield nav-icon"></i>
                 <p>Permisos</p>
             </a>
         </li>
     </ul>
 </li>
-<li class="nav-item">
-    <a href="#" class="nav-link">
-        <i class="nav-icon fas fa-tachometer-alt"></i>
-        <p>
-            Dashboard
-            <i class="right fas fa-angle-left"></i>
-        </p>
-    </a>
-    <ul class="nav nav-treeview">
-        <li class="nav-item">
-            <a href="{{ route('personas.index') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Persona</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="{{ route('usuario.index') }}" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Usuarios</p>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="./index3.html" class="nav-link">
-                <i class="far fa-circle nav-icon"></i>
-                <p>Dashboard v3</p>
-            </a>
-        </li>
-    </ul>
-</li>
+

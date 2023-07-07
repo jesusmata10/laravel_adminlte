@@ -30,7 +30,7 @@ return new class extends Migration
             $table->boolean('status')->default(true);
             $table->timestamps();
 
-            $table->foreign('personas_id')->references('id')->on('personas')->onUpdate('cascade')->onDelete('cascade');
+            $table->foreign('personas_id')->references('id')->on('personas')->onUpdate('cascade')->onDelete('');
             
         });
     }

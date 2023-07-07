@@ -11,11 +11,11 @@
                     </div>
                 @endif
         
-                <div class="card">
+                <div class="card card-primary card-outline">
                     <div class="card-header">
                         <h3 class="card-title">Permiso por Rol</h3>
                     </div>
-                    <form class="form" id="rolesForm" name="rolesForm" role="form" data-toggle="validator" method="POST" action="{{-- url('/storeRolPermiso') --}}">
+                    <form class="form" id="rolesForm" name="rolesForm" role="form" data-toggle="validator" method="POST" action="{{ route('rolesPermission') }}">
                         {{ csrf_field() }}
         
                         <div class="card-body">
@@ -49,8 +49,8 @@
         
                         <div class="card-footer">
                             <div class="float-right">
-                                <button type="submit" class="btn btn-outline-primary">Aceptar</button>
-                                <a href="{{ url('/roles') }}" class="btn btn-outline-danger">Cancelar</a>
+                                <button type="submit" class="btn btn-sm btn-primary">Aceptar</button>
+                                <a href="{{ route('permisos.index') }}" class="btn btn-sm btn-danger">Cancelar</a>
                             </div>
                         </div>
         

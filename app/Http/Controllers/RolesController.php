@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
+use Illuminate\Support\Facades\DB;
 
 class RolesController extends Controller
 {
@@ -25,6 +26,20 @@ class RolesController extends Controller
         $roles = Role::select('id', 'name')->orderBy('name')->paginate(2);
 
         return view('roles.index', compact('roles', 'breadcrumb'));
+    }
+
+    public function rolesPermission()
+    {
+        $breadcrumb = [
+            [
+                'link' => '#',
+                'name' => 'Roles',
+            ]
+        ];
+
+        $roles = Role::select('id', 'name')->orderBy('name')->paginate(2);
+
+        return view('roles.rolesPermission', compact('roles', 'breadcrumb'));
     }
 
     /**
@@ -70,6 +85,18 @@ class RolesController extends Controller
         return redirect()->route('roles.create')->with('error', __('messages.information_not_stored'));
     }
 
+    public function storeRolPermiso(Request $request)
+    {
+        dd($request);
+        try {
+            $rol = Role::where('name', $request->rol)->first();
+            $rol->syncPermissions($request->permiso);
+
+            return redirect()->route('permisos.index')->with('success', __('messages.stored_information'));
+        } catch (\Illuminate\Database\QueryException $e) {
+            return redirect()->route('permisos.index')->with('error', __('messages.information_not_stored'));
+        }
+    }
     /*public function storeRolModulo(Request $request)
     {
         try {
@@ -92,17 +119,7 @@ class RolesController extends Controller
         }
 
     }
-    public function storeRolPermiso(Request $request)
-    {
-        try {
-            $rol = Role::where('name', $request->rol)->first();
-            $rol->syncPermissions($request->permiso);
-
-            return redirect('/roles')->with('success', __('messages.stored_information'));
-        } catch (\Illuminate\Database\QueryException $e) {
-            return redirect('/roles')->with('error', __('messages.information_not_stored'));
-        }
-    }*/
+    */
 
     /**
      * Display the specified resource.
@@ -112,7 +129,19 @@ class RolesController extends Controller
      */
     public function show($id)
     {
-        //
+        $breadcrumb = [
+            [
+                'link' => '#',
+                'name' => 'Roles',
+            ]
+        ];
+
+        //$permission = Permission::select('id', 'name')->orderBy('name')->paginate(2);
+        $rol = Role::select('id', 'name')->find($id);
+        $permission = Permission::select('id', 'name')->orderBy('name')->get();
+        $permisionRole = DB::table('role_has_permissions')->where('role_id', $rol->id)->pluck('permission_id');
+
+        return view('roles.rolesPermission', compact('permission', 'permisionRole', 'rol', 'breadcrumb'));
     }
 
     /**

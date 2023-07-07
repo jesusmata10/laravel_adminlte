@@ -2,7 +2,6 @@ import './bootstrap';
 import '../../node_modules/jquery/dist/jquery.min.js';
 import '../../node_modules/jquery-ui/dist/jquery-ui';
 import '../../node_modules/jquery-ui/ui/i18n/datepicker-es';
-import 'flag-icons';
 import { moment } from 'moment';
 window.moment = moment;
 import 'moment/dist/locale/es';

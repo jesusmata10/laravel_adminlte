@@ -5,7 +5,7 @@
   background-image: url('/public/storage/img/login.jpg');
   background-attachment: fixed;
   background-size: cover;
-  background-repeat: no-repeat, repeat ;
+  background-repeat: no-repeat, repeat;
   background-attachment: fixed;
   display: -webkit-flex;
   display: -ms-flexbox;
@@ -17,4 +17,8 @@
   -webkit-justify-content: center;
   -ms-flex-pack: center;
   justify-content: center;
+}
+
+.sidebarper {
+  background: linear-gradient(to left, #0285D0, #0073AF, #004876);
 }

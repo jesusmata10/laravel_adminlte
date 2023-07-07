@@ -26,6 +26,7 @@ class PermisosController extends Controller
         ];
 
         $permisos = Permission::select('id', 'name')->paginate(5);
+        //@dump($permisos);
 
         return view('permisos.index', compact('permisos', 'breadcrumb'));
     }
@@ -59,7 +60,18 @@ class PermisosController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        //$permission = Permission::create(['name' => 'edit articles']);
+        $permission = new Permission();
+        $permission->name = $request->name;
+        $permission->description = $request->description;
+        $permission->save();
+
+        if ($permission->save()) {
+            return redirect()->route('permisos.index')->with('success', __('¡Permiso creado sastifactoriamente!'));
+        }
+
+        return redirect()->route('permisos.create')->with('error', __('messages.information_not_stored'));
+
     }
 
     /**
